@@ -1,0 +1,65 @@
+{
+  "api_key": null,
+  "card_id": "b7be22c9-de9e-4c95-a415-aabd9f2e122e",
+  "competition_mode": null,
+  "environments": [
+    {
+      "actions": 790,
+      "completed": true,
+      "id": "ft09-0d8bbf25",
+      "level_count": 6,
+      "levels_completed": 6,
+      "resets": 6,
+      "runs": [
+        {
+          "actions": 790,
+          "completed": true,
+          "guid": "b705a6b4-4d6a-4fb8-8a95-e2cd88662c08",
+          "id": null,
+          "level_actions": [
+            7,
+            7,
+            340,
+            316,
+            107,
+            13
+          ],
+          "level_baseline_actions": [
+            43,
+            12,
+            23,
+            28,
+            65,
+            37
+          ],
+          "level_scores": [
+            100.0,
+            100.0,
+            0.4576124567474048,
+            0.7851305880467874,
+            36.902786269543185,
+            100.0
+          ],
+          "levels_completed": 6,
+          "message": null,
+          "number_of_environments": null,
+          "number_of_levels": null,
+          "resets": 6,
+          "score": 51.85844243191168,
+          "state": "WIN"
+        }
+      ],
+      "score": 51.85844243191168
+    }
+  ],
+  "opaque": null,
+  "score": 51.85844243191168,
+  "source_url": null,
+  "tags": null,
+  "tags_scores": [],
+  "total_actions": 790,
+  "total_environments": 1,
+  "total_environments_completed": 1,
+  "total_levels": 6,
+  "total_levels_completed": 6
+}

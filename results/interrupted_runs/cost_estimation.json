@@ -1,0 +1,100 @@
+{
+  "games": {
+    "cn04_01": {
+      "cached_input_cost_usd": 198.166976,
+      "cached_input_tokens": 792667904,
+      "estimated_cost_usd": 258.616526,
+      "input_cost_usd": 39.33189,
+      "input_tokens": 808400660,
+      "output_cost_usd": 21.11766,
+      "output_tokens": 1407844,
+      "threads": 3
+    },
+    "cn04_02": {
+      "cached_input_cost_usd": 183.534464,
+      "cached_input_tokens": 734137856,
+      "estimated_cost_usd": 282.3446515,
+      "input_cost_usd": 67.2063275,
+      "input_tokens": 761020387,
+      "output_cost_usd": 31.603859999999997,
+      "output_tokens": 2106924,
+      "threads": 8
+    },
+    "dc22_01": {
+      "cached_input_cost_usd": 236.162656,
+      "cached_input_tokens": 944650624,
+      "estimated_cost_usd": 313.671221,
+      "input_cost_usd": 52.593895,
+      "input_tokens": 965688182,
+      "output_cost_usd": 24.91467,
+      "output_tokens": 1660978,
+      "threads": 2
+    },
+    "dc22_02": {
+      "cached_input_cost_usd": 192.075648,
+      "cached_input_tokens": 768302592,
+      "estimated_cost_usd": 274.624883,
+      "input_cost_usd": 51.244415,
+      "input_tokens": 788800358,
+      "output_cost_usd": 31.30482,
+      "output_tokens": 2086988,
+      "threads": 6
+    },
+    "g50t_01": {
+      "cached_input_cost_usd": 26.250432,
+      "cached_input_tokens": 105001728,
+      "estimated_cost_usd": 37.0660795,
+      "input_cost_usd": 6.8376925,
+      "input_tokens": 107736805,
+      "output_cost_usd": 3.977955,
+      "output_tokens": 265197,
+      "threads": 1
+    },
+    "g50t_02": {
+      "cached_input_cost_usd": 161.965216,
+      "cached_input_tokens": 647860864,
+      "estimated_cost_usd": 250.3429335,
+      "input_cost_usd": 57.305217500000005,
+      "input_tokens": 670782951,
+      "output_cost_usd": 31.072499999999998,
+      "output_tokens": 2071500,
+      "threads": 6
+    },
+    "ka59_01": {
+      "cached_input_cost_usd": 28.0416,
+      "cached_input_tokens": 112166400,
+      "estimated_cost_usd": 42.984805,
+      "input_cost_usd": 8.38063,
+      "input_tokens": 115518652,
+      "output_cost_usd": 6.562575,
+      "output_tokens": 437505,
+      "threads": 2
+    },
+    "lf52_01": {
+      "cached_input_cost_usd": 191.728448,
+      "cached_input_tokens": 766913792,
+      "estimated_cost_usd": 248.1299755,
+      "input_cost_usd": 39.3630425,
+      "input_tokens": 782659009,
+      "output_cost_usd": 17.038485,
+      "output_tokens": 1135899,
+      "threads": 1
+    }
+  },
+  "pricing_usd_per_1m_tokens": {
+    "cached_input": 0.25,
+    "input": 2.5,
+    "output": 15.0
+  },
+  "totals": {
+    "cached_input_cost_usd": 1217.92544,
+    "cached_input_tokens": 4871701760,
+    "estimated_cost_usd": 1707.781075,
+    "games": 8,
+    "input_cost_usd": 322.26311,
+    "input_tokens": 5000607004,
+    "output_cost_usd": 167.592525,
+    "output_tokens": 11172835,
+    "threads": 29
+  }
+}
