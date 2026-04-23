@@ -42,5 +42,5 @@ Fully clean handling—ensuring identical execution with or without interruption
 
 ## Discussion
 
-The agent demonstrates strong performance on a subset of games, including perfect solutions in 4 cases. However, performance varies significantly between runs of the same game (see cn04` and `g50t`).
+The agent demonstrates strong performance on a subset of games, including perfect solutions in 4 cases. However, performance varies significantly between runs of the same game (see `cn04` and `g50t`).
 Handling interruptions and improving consistency are key next steps.
