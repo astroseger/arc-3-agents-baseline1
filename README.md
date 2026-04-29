@@ -1,4 +1,3 @@
-
 # Results on ARC-3 Public Games
 
 Evaluation on the public [ARC-AGI-3](https://arcprize.org/arc-agi/3) games.
@@ -48,7 +47,6 @@ We deliberately do not resume such runs manually. Doing so would introduce varia
 | tu93 | 01 | 9/9 | 78.33% | $102.51 | completed |
 | vc33 | 01 | 2/7 | 8.59% | $369.47 | completed |
 | wa30 | 01 | 0/9 | 0.00% | $88.18 | completed |
-
 
 ## Summary
 - Fully solved (all levels solved): **7 games**
