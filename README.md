@@ -16,7 +16,7 @@ We deliberately do not resume such runs manually. Doing so would introduce varia
 
 ## Results
 
-| Game | Run | Levels Solved | Human-Normalized Score | Estimated API Cost | Status |
+| Game | Run | Levels Solved | Human-Normalized Score | Estimated API Cost | Interruption Status |
 |------|-----:|--------------:|-----------------------:|------:|--------|
 | ar25 | 01 | 8/8 | 100.00% | $76.83 | completed |
 | bp35 | 01 | 1/9 | 0.61% | $343.40 | completed |
