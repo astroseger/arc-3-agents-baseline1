@@ -50,16 +50,6 @@
       "output_tokens": 265197,
       "threads": 1
     },
-    "g50t_02": {
-      "cached_input_cost_usd": 161.965216,
-      "cached_input_tokens": 647860864,
-      "estimated_cost_usd": 250.3429335,
-      "input_cost_usd": 57.305217500000005,
-      "input_tokens": 670782951,
-      "output_cost_usd": 31.072499999999998,
-      "output_tokens": 2071500,
-      "threads": 6
-    },
     "ka59_01": {
       "cached_input_cost_usd": 28.0416,
       "cached_input_tokens": 112166400,
@@ -79,6 +69,56 @@
       "output_cost_usd": 17.038485,
       "output_tokens": 1135899,
       "threads": 1
+    },
+    "ls20_01": {
+      "cached_input_cost_usd": 274.139936,
+      "cached_input_tokens": 1096559744,
+      "estimated_cost_usd": 374.5340685,
+      "input_cost_usd": 58.499972500000005,
+      "input_tokens": 1119959733,
+      "output_cost_usd": 41.89416,
+      "output_tokens": 2792944,
+      "threads": 9
+    },
+    "re86_01": {
+      "cached_input_cost_usd": 309.975424,
+      "cached_input_tokens": 1239901696,
+      "estimated_cost_usd": 419.85970899999995,
+      "input_cost_usd": 63.10133999999999,
+      "input_tokens": 1265142232,
+      "output_cost_usd": 46.782945000000005,
+      "output_tokens": 3118863,
+      "threads": 5
+    },
+    "s5i5_01": {
+      "cached_input_cost_usd": 285.59264,
+      "cached_input_tokens": 1142370560,
+      "estimated_cost_usd": 395.2001925,
+      "input_cost_usd": 62.5872775,
+      "input_tokens": 1167405471,
+      "output_cost_usd": 47.020275000000005,
+      "output_tokens": 3134685,
+      "threads": 7
+    },
+    "sc25_01": {
+      "cached_input_cost_usd": 65.425536,
+      "cached_input_tokens": 261702144,
+      "estimated_cost_usd": 97.33884599999999,
+      "input_cost_usd": 18.185670000000002,
+      "input_tokens": 268976412,
+      "output_cost_usd": 13.72764,
+      "output_tokens": 915176,
+      "threads": 4
+    },
+    "sp80_01": {
+      "cached_input_cost_usd": 56.99744,
+      "cached_input_tokens": 227989760,
+      "estimated_cost_usd": 86.81176500000001,
+      "input_cost_usd": 16.515055,
+      "input_tokens": 234595782,
+      "output_cost_usd": 13.29927,
+      "output_tokens": 886618,
+      "threads": 2
     }
   },
   "pricing_usd_per_1m_tokens": {
@@ -87,14 +127,14 @@
     "output": 15.0
   },
   "totals": {
-    "cached_input_cost_usd": 1217.92544,
-    "cached_input_tokens": 4871701760,
-    "estimated_cost_usd": 1707.781075,
-    "games": 8,
-    "input_cost_usd": 322.26311,
-    "input_tokens": 5000607004,
-    "output_cost_usd": 167.592525,
-    "output_tokens": 11172835,
-    "threads": 29
+    "cached_input_cost_usd": 2048.0912,
+    "cached_input_tokens": 8192364800,
+    "estimated_cost_usd": 2831.1827225,
+    "games": 12,
+    "input_cost_usd": 483.8472075,
+    "input_tokens": 8385903683,
+    "output_cost_usd": 299.24431500000003,
+    "output_tokens": 19949621,
+    "threads": 50
   }
 }

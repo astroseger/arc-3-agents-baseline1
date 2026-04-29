@@ -1,39 +1,39 @@
 {
   "api_key": null,
-  "card_id": "5b6bfdc7-9b0d-4178-a1e2-5e03b8a3bedd",
+  "card_id": "d0a4d689-36f1-48f7-ac46-9e4cd7254ec8",
   "competition_mode": null,
   "environments": [
     {
-      "actions": 1998,
+      "actions": 305,
       "completed": false,
-      "id": "cn04-2fe56bfb",
+      "id": "sp80-589a99af",
       "level_count": 6,
       "levels_completed": 1,
-      "resets": 20,
+      "resets": 16,
       "runs": [
         {
-          "actions": 1998,
+          "actions": 305,
           "completed": false,
-          "guid": "38c0083c-fbe0-48b2-a5e4-46c825c7640e",
+          "guid": "70999237-67fd-4b19-8f52-5861cfe76144",
           "id": null,
           "level_actions": [
-            585,
-            1413,
+            7,
+            298,
             0,
             0,
             0,
             0
           ],
           "level_baseline_actions": [
-            29,
-            54,
-            85,
-            300,
-            208,
-            113
+            39,
+            58,
+            25,
+            148,
+            96,
+            152
           ],
           "level_scores": [
-            0.24574475856527137,
+            100.0,
             0.0,
             0.0,
             0.0,
@@ -44,21 +44,21 @@
           "message": null,
           "number_of_environments": null,
           "number_of_levels": null,
-          "resets": 20,
-          "score": 0.011702131360251018,
+          "resets": 16,
+          "score": 4.761904761904762,
           "state": "GAME_OVER"
         }
       ],
-      "score": 0.011702131360251018
+      "score": 4.761904761904762
     }
   ],
   "opaque": null,
-  "score": 0.011702131360251018,
+  "score": 4.761904761904762,
   "source_url": null,
   "tags": null,
   "tags_scores": [
     {
-      "actions": 1998,
+      "actions": 305,
       "completed": null,
       "guid": null,
       "id": "keyboard_click",
@@ -70,11 +70,11 @@
       "number_of_environments": 1,
       "number_of_levels": 6,
       "resets": null,
-      "score": 0.011702131360251018,
+      "score": 4.761904761904762,
       "state": null
     }
   ],
-  "total_actions": 1998,
+  "total_actions": 305,
   "total_environments": 1,
   "total_environments_completed": 0,
   "total_levels": 6,
