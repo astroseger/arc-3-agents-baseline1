@@ -1,27 +1,27 @@
 {
   "api_key": null,
-  "card_id": "082b7760-a47b-4230-8335-05554285a5b6",
+  "card_id": "d391c61b-595c-473d-ab28-45b606592276",
   "competition_mode": null,
   "environments": [
     {
-      "actions": 1652,
+      "actions": 2083,
       "completed": false,
       "id": "g50t-5849a774",
       "level_count": 7,
       "levels_completed": 4,
-      "resets": 10,
+      "resets": 13,
       "runs": [
         {
-          "actions": 1652,
+          "actions": 2083,
           "completed": false,
-          "guid": "e83a357f-c6cd-4d75-a0bc-3f41f28d3431",
+          "guid": "0481c35c-5101-4310-86d9-6de8e384a823",
           "id": null,
           "level_actions": [
             52,
             50,
             195,
             215,
-            1140,
+            1571,
             0,
             0
           ],
@@ -47,7 +47,7 @@
           "message": null,
           "number_of_environments": null,
           "number_of_levels": null,
-          "resets": 10,
+          "resets": 13,
           "score": 34.028176951253876,
           "state": "GAME_OVER"
         }
@@ -61,7 +61,7 @@
   "tags": null,
   "tags_scores": [
     {
-      "actions": 1652,
+      "actions": 2083,
       "completed": null,
       "guid": null,
       "id": "keyboard",
@@ -77,7 +77,7 @@
       "state": null
     }
   ],
-  "total_actions": 1652,
+  "total_actions": 2083,
   "total_environments": 1,
   "total_environments_completed": 0,
   "total_levels": 7,

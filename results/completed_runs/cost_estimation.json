@@ -40,15 +40,15 @@
       "output_tokens": 811034,
       "threads": 3
     },
-    "g50t_03": {
-      "cached_input_cost_usd": 200.58448,
-      "cached_input_tokens": 802337920,
-      "estimated_cost_usd": 288.9683675,
-      "input_cost_usd": 53.7722575,
-      "input_tokens": 823846823,
-      "output_cost_usd": 34.61163,
-      "output_tokens": 2307442,
-      "threads": 5
+    "g50t_02": {
+      "cached_input_cost_usd": 234.700928,
+      "cached_input_tokens": 938803712,
+      "estimated_cost_usd": 339.50076049999996,
+      "input_cost_usd": 65.4900225,
+      "input_tokens": 964999721,
+      "output_cost_usd": 39.30981,
+      "output_tokens": 2620654,
+      "threads": 6
     },
     "ka59_02": {
       "cached_input_cost_usd": 170.762688,
@@ -71,16 +71,6 @@
       "threads": 1
     },
     "m0r0_01": {
-      "cached_input_cost_usd": 99.246784,
-      "cached_input_tokens": 396987136,
-      "estimated_cost_usd": 143.8820815,
-      "input_cost_usd": 28.6003575,
-      "input_tokens": 408427279,
-      "output_cost_usd": 16.034940000000002,
-      "output_tokens": 1068996,
-      "threads": 5
-    },
-    "m0r0_02": {
       "cached_input_cost_usd": 85.99584,
       "cached_input_tokens": 343983360,
       "estimated_cost_usd": 124.451865,
@@ -187,14 +177,14 @@
     "output": 15.0
   },
   "totals": {
-    "cached_input_cost_usd": 2462.474112,
-    "cached_input_tokens": 9849896448,
-    "estimated_cost_usd": 3501.528812,
-    "games": 18,
-    "input_cost_usd": 629.523515,
-    "input_tokens": 10101705854,
-    "output_cost_usd": 409.531185,
-    "output_tokens": 27302079,
-    "threads": 81
+    "cached_input_cost_usd": 2397.343776,
+    "cached_input_tokens": 9589375104,
+    "estimated_cost_usd": 3408.1791235,
+    "games": 17,
+    "input_cost_usd": 612.6409225,
+    "input_tokens": 9834431473,
+    "output_cost_usd": 398.194425,
+    "output_tokens": 26546295,
+    "threads": 77
   }
 }

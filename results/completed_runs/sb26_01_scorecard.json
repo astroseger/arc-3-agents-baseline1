@@ -1,6 +1,6 @@
 {
   "api_key": null,
-  "card_id": "7f64955d-3643-4711-8f7e-b1ff2a394a84",
+  "card_id": "947f15a0-ddbd-4f49-be32-3be7cb2c9076",
   "competition_mode": null,
   "environments": [
     {
@@ -14,7 +14,7 @@
         {
           "actions": 162,
           "completed": true,
-          "guid": "09195104-48d3-4fbd-af42-a4c6e04ffc97",
+          "guid": "557fb79d-b235-42a9-a088-09c65c87d3f7",
           "id": null,
           "level_actions": [
             17,
