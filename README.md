@@ -1,4 +1,4 @@
-# Results on ARC-3 Public Games
+# Results on ARC-AGI-3 Public Games
 
 Evaluation on the public [ARC-AGI-3](https://arcprize.org/arc-agi/3) games.
 
