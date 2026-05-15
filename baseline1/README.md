@@ -1,62 +1,144 @@
-# Source code of BASELINE1 agent with docker based automation
+# BASELINE1 Agent Source with Docker Automation
 
 ## Introduction
 
-Source code of baseline1 agent with docker based automation. To run this agent your will need
-- linux machine with installed docker
-- arc api key setup in environment as `ARC_API_KEY`
-- ChatGPT PRO subsciption. With one subscirption you will be able to run 2-6 games with a weekly limit
+This repository contains the source code for the BASELINE1 agent and the Docker-based automation used to run it.
 
-Warning the current system is lack mechanisms of recovering from fatal error in codex. The possible errors are
-- Sometime codex crush with "model at model capacity limits" error. Which happens twice for a month for me. 
-- You hit you 5 hours or weekly limit in codex. Based on my expirience, with a single chatGPT PRO (200$) subscrition you can safely run two games in parallel without hitting 5 hours limit 
+If you want to check that the agent does not have access to game-specific hidden information and is intended to be general within the ARC-AGI-3 universe, read [AGENT.md](AGENT.md).
 
-## System requirments 
-You need 1 better 2 moder fast CPUs for one game. You also need ~3 GB of memory for one game. So if you run all 25 games in parallel you better have 48CPU/64GB RAM. But for running 2 games in parallel almost any modern machine would be ok.
+To run the system you need:
 
-## How to run the system
+- a Linux machine with Docker installed;
+- an ARC API key available in the environment as `ARC_API_KEY`;
+- a ChatGPT Pro subscription.
 
-### Setup your codex accounts
-Based on my expirience with GPT-5.5/medium as based model, you can run two games in parallel with a single ChatGPT PRO subscription without hitting 5 hour limit. So we will create two codex folders two run two games in parallel
+With the default GPT-5.5/medium configuration, one ChatGPT Pro subscription (200 USD) is enough to run a full experiment for roughly 2-8 games within the Codex weekly limit for that account.
 
+Warning: the current system does not have a graceful recovery mechanism for fatal Codex errors. If a fatal Codex error appears, the agent stops and cannot automatically recover the run. Known failure cases include:
 
+- Codex can occasionally crash with a "model at model capacity limits" error. In my experience, this happened about twice in a month.
+- A run can stop when the Codex account reaches its 5-hour or weekly usage limit. In my experience, with a single ChatGPT Pro subscription (200 USD), you can safely run two games in parallel without hitting the 5-hour limit.
 
-1. Build the dockers `./src/build_dockers.sh`
-2. setup codex01: `cd codex_accounts; ./prepare_account.sh codex01` .  Follow instruction to authenticate codex with device authentication with your ChatGPT PRO subsciption
-4. (optional) check that codex account setup properly by running `cd codex_accounts; check_account.sh codex01`
-5. (optional) setup codex02: `cd codex_accounts; ./prepare_account.sh codex02`. Follow instructions to authenticate codex with device authentication with the same ChatGPT PRO subsciption
-6. (optional) check that codex account setup properly by running `cd codex_accounts; check_account.sh codex02`
+## System Requirements
 
+For one game, expect to need about 1-2 moderately fast CPU cores and about 3 GB of memory.
 
-You all setup two run expirements
+For 25 games in parallel, a reasonable target is about 48 CPU cores and 64 GB RAM. For two games in parallel, almost any modern machine should be enough.
 
-### Run expiriments
+## How to Run the System
 
-1. Edit list of codex account folders in run_config.yaml if you used different folder names (by default it is [codex01, codex02] to run two games in paramme) 
-2. Edit list of games you want to run in `run_config.yaml`. You can put more games then number of codex account folders you have. They will be run sequentially two in parallel.
-3. Run the system (better do it in the screen for example becaues runs could take some time).
+### Set up Codex accounts
+
+As mentioned above, you can run two games in parallel with a single ChatGPT Pro subscription (200 USD) without hitting the 5-hour usage limit. To do this, set up two Codex account folders authenticated with the same ChatGPT subscription.
+
+To create and authenticate those accounts:
+
+1. Build the Docker images:
+
+```bash
+./src/build_dockers.sh
 ```
-# better in screen or tmux!
+
+2. Set up the first Codex account:
+
+```bash
+cd codex_accounts
+./prepare_account.sh codex01
+```
+
+Follow the device-auth instructions and authenticate with your ChatGPT Pro subscription.
+
+3. Optionally check the first account:
+
+```bash
+cd codex_accounts
+./check_account.sh codex01
+```
+
+4. Optionally set up a second account for parallel runs:
+
+```bash
+cd codex_accounts
+./prepare_account.sh codex02
+```
+
+5. Optionally check the second account:
+
+```bash
+cd codex_accounts
+./check_account.sh codex02
+```
+
+After this, the system is ready to run experiments.
+
+### Run experiments
+
+1. Edit `run_config.yaml`.
+
+   Set `codex_accounts` to the account folders you created, if you used different folder names. Set `games` to the game IDs you want to run. You can list more games than accounts; the controller runs up to one game per account in parallel and queues the rest.
+
+2. Make sure `ARC_API_KEY` is set:
+
+```bash
+export ARC_API_KEY=...
+```
+
+3. Start the controller, preferably inside `screen` or `tmux` because runs can take a long time:
+
+```bash
 python3 run_controller.py
 ```
-By default controller will be run in local model (not in competition mode), so your will generate scorecards by running `analyse_runs.py`
 
-## Scripts for analysis of expirements
+By default, `run_controller.py` uses the local server mode, not competition mode. Results are written under `run/`. The controller expects `run/` not to exist before it starts.
 
-In `analysis_scripts` there are several usefull script for analsis.
+After the run finishes, generate score summaries with the analysis scripts.
 
-- count_level_attempts_dirs.py usefull for traking progress of the agent during the run
-run:
-`python3 analysis_scripts/count_level_attempts_dirs.py run`
+## Analysis Scripts
 
-- `analyse_runs.py` to calculate scores
-`python3 analysis_scripts/analyse_runs.py run`
-- `print_results_md.py` to print scores in a table (you should run it after `analyse_runs.py`)
-`python3 print_results_md.py run`
-- `summarize_agent_logs_in_dir.py` function to analyse logs
-- `get_comptetiotion_scorecard_from_id.sh` - to download you competition card usufull if you run the system in competition mode
+The `analysis_scripts/` directory contains helper scripts for inspecting runs.
 
-## Running in competition mode
-If you want you can run the system in competition mode by passing --competition parameter to the `python3 run_controller.py`. However there are few warning.
-1. Competition scorecard is closed after 15 min of incativity (on practive this number seems to be bigger). The agent can easily take more then 15 minutes on simplification stage (in some cases more then hour, when GPT-5.5 is busy and codex is slow). So this mode is suitable only for massive parallel runs, or we need somehow remove this inactivity limit
-2. Competition scorecard will be closed after 24 hours. So if run takes long. Even individual game can take more then 24 hours to complete, in some cases even more. Also you might not have enought chatGPT subscirptions to run all games in paralle. In any case you should know about this limit.
+- `count_level_attempts_dirs.py` tracks progress from attempt directories:
+
+```bash
+python3 analysis_scripts/count_level_attempts_dirs.py run
+```
+
+- `analyse_runs.py` calculates scores:
+
+```bash
+python3 analysis_scripts/analyse_runs.py run
+```
+
+- `print_results_md.py` prints scores as a Markdown table. Run it after `analyse_runs.py`:
+
+```bash
+python3 analysis_scripts/print_results_md.py run
+```
+
+- `summarize_agent_logs_in_dir.py` summarizes agent logs:
+
+```bash
+python3 analysis_scripts/summarize_agent_logs_in_dir.py run
+```
+
+- `get_comptetiotion_scorecard_from_id.sh` downloads a competition scorecard by ID when you run in competition mode.
+
+## Running in Competition Mode
+
+To run against the competition server, pass `--competition`:
+
+```bash
+python3 run_controller.py --competition
+```
+
+There are two important caveats:
+
+1. A competition scorecard can be closed after about 15 minutes of inactivity. In practice the limit may be somewhat longer, but the agent can spend more than 15 minutes in simplification or refactoring prompts, especially when Codex is slow. This makes competition mode better suited to large parallel runs.
+
+2. A competition scorecard closes after 24 hours. Some individual games can take more than 24 hours, and you may not have enough ChatGPT Pro subscriptions to run all games in parallel.
+
+## API-Key Controller
+
+There is also `run_controller_with_api_key.py`, which runs Codex with `OPENAI_API_KEY` instead of authenticated Codex account folders.
+
+This mode is expected to be much more expensive. In earlier testing, prompt-cache hit rates were much lower with API-key runs than with ChatGPT Pro-backed Codex accounts. Because of this, runs that fit within the weekly limit of a single ChatGPT Pro account may cost around 5000 USD if run through the API. The script prints a warning and requires explicit confirmation before it starts.
