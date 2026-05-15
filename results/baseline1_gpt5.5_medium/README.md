@@ -63,7 +63,6 @@ Full runs, including all generated artifacts, are available here: [baseline1_gpt
 ## Summary
 
 - Fully solved games: **13 games**
-- Total failure (best run score < 5%): **3 games**
 - Mean score, averaging runs within each game first: **52.63%**
 
 
