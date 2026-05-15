@@ -1,0 +1,6 @@
+You have reached the `GAME_OVER` state in the current attempt.
+Verify that you understand why this happened, and incorporate that explanation into your world model.
+Inspect the result of the last step with your own eyes, looking for visual clues that could help explain the failure. PNG inspection is mandatory whenever an action produces multiple frames. You should use the Animation-analysis subagent and also inspect such animations yourself. These animations may contain important clues for understanding why `GAME_OVER` happened.
+Remember: the game mechanics are very simple. You should never have multiple level-specific conditions for reaching `GAME_OVER`. If your world model currently has such conditions, think about how to generalize them.
+Inspect the `GAME_OVER` step visually and look for the simplest shared explanation.
+

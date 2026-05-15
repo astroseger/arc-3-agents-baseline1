@@ -1,0 +1,15 @@
+Now step back and review the whole world model again, with special attention to the conceptual role of reconstruction and rendering.
+
+`world_model_state_io.py` should not feel like a collection of level-specific tricks for decoding and re-encoding frames. It should feel like a clean bridge between observations and one compact underlying world model. If it still needs many ad-hoc rules, ask what simpler conceptual explanation would make those rules disappear.
+
+Review the remaining special handling in reconstruction and rendering one by one. For each one:
+- inspect the relevant earlier frames again
+- ask what simpler game mechanic could explain them
+- ask whether the same phenomenon appears in multiple levels under slightly different visual forms
+- ask whether a cleaner internal ontology would let reconstruction and rendering become straightforward
+
+The game itself is likely simple enough to explain in a few sentences. If reconstruction or rendering still requires many special cases, that is a sign that the model is too close to observed appearances and not close enough to the true mechanics.
+
+Use the visual evidence from previous levels to compress the model conceptually. Look for the simpler explanation that makes earlier and later levels part of the same system rather than separate decoding/rendering problems. Then test that explanation against the recorded observations and simplify the implementation accordingly.
+
+Update `world_model.md` together with the computational model. The textual explanation of how observations map to state, and how state maps back to observations, should become simpler as the actual model becomes simpler.

@@ -1,0 +1,1 @@
+Continue until you reach the `LEVEL_COMPLETED` or `GAME_OVER` state. Do not stop to report intermediate progress.

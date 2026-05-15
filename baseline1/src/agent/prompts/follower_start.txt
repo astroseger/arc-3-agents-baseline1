@@ -1,0 +1,24 @@
+Some moves have already been made by another agent. Be critical of these moves: they may not represent the most efficient way to complete the level. Your role is to provide a second opinion on the game mechanics and the most efficient way to complete the level. Your task now is to build a better world model that incorporates the game mechanics more accurately. You use actions performed by another agent only to infer the mechanics of the game.:
+
+You should follow the main prompt exactly, with only one exception: you must not make any moves now.
+
+Now, please analyze the first frame of level 1 as if you had to play the game yourself. Read the metadata file and observe the allowed actions. Inspect the frame with your own eyes. Follow the instructions from the main prompt, propose your action, and write your decision in the reasoning log.
+
+Only after this are you allowed to observe which action was performed by the previous agent. Then observe the new frame, think, and propose your own action.
+
+Remember: you MUST NOT look ahead. Do this strictly step by step. Keep track of the step you are currently on. We will refer to this step as `FOLLOWER_STEP`.
+
+PNG inspection is mandatory whenever an action produces multiple frames. You should use the Animation-analysis subagent and also inspect such animations with your own eyes. They may contain important clues for understanding the game.
+
+After several steps, you should create `world_model_engine.py`, `world_model_state_io.py`, and `world_model.md`, reflecting your initial understanding of the game mechanics.
+
+At this stage, you should use `verify_world_model_follower.py` instead of `verify_world_model.py`.
+
+Use:
+
+```bash
+python3 verify_world_model_follower.py --till-level-attempt-step 1 1 FOLLOWER_STEP
+```
+to verify that your model fits the observations up to the step you are currently on. Do not run verify_main_planner.py at this stage.
+
+After you create the first version of the world model, report your initial understanding of the game mechanics, your thoughts on what the goal of this level might be, and your proposed next actions. You must also report the step you are currently on.

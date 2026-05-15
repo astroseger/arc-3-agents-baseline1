@@ -1,0 +1,49 @@
+Some moves have already been made by another agent. Be critical of these moves: they may not represent the most efficient way to complete the level. Your role is to provide a second opinion on the game mechanics and the most efficient way to complete the level. Your task now is to build a better world model that incorporates the game mechanics more accurately. You use actions performed by another agent only to infer the mechanics of the game.
+
+You should follow the main prompt exactly, with only one exception: you must not make any moves now.
+
+You are currently on level {LEVEL_INDEX} , attempt {ATTEMPT_INDEX}
+Your FOLLOWER_STEP is {FOLLOWER_STEP}
+
+Use the actions performed by another agent only to infer the mechanics of the game.
+
+Remember: you MUST NOT look ahead. Proceed strictly step by step. Keep track of the step you are currently on: `FOLLOWER_STEP`.
+
+Now do the following:
+
+1. Think about which next move you would choose from the current `FOLLOWER_STEP`.
+
+   Do this exactly as instructed in the main prompt: follow the Strict Model-First Protocol. Very early in level 1, you should start planning your moves via a planner. You should use either the auxiliary planner or the main planner, depending on whether you already understand how to complete the level.
+
+   Use one of the following commands to run your planners from `FOLLOWER_STEP`:
+
+   ```bash
+   python3 run_aux_planner.py --from-attempt {LEVEL_INDEX} {ATTEMPT_INDEX} FOLLOWER_STEP
+   python3 run_main_planner.py --from-attempt {LEVEL_INDEX} {ATTEMPT_INDEX} FOLLOWER_STEP
+   ```
+   Write your decision and reasoning in the reasoning log.
+   Remember: this is a visual puzzle, and the solution to level 1 is relatively simple and logical.
+
+2. Run verify_world_model.py. It will tell you the step at which your current world model diverges from the observations. We will refer to this step as `DIVERGE_STEP`.
+
+3. Observe the actions performed by the other agent up to DIVERGE_STEP. Check the results of these actions in the game.
+
+   Remember: PNG inspection is mandatory whenever an action produces multiple frames. You should use the Animation-analysis subagent and also inspect such animations with your own eyes. They may contain important clues for understanding the game.
+
+4. Play these actions through your world model and think about why your world model diverged from the observations at DIVERGE_STEP. Check the output and artifacts created by verify_world_model.py in step 2; they may help you fix your world model. Fix your world model.
+
+5. Make sure your world model is correct up to DIVERGE_STEP by running:
+   ```
+   python3 verify_world_model_follower.py --till-level-attempt-step {LEVEL_INDEX} {ATTEMPT_INDEX} DIVERGE_STEP
+   python3 verify_main_planner.py
+   ```
+
+6. Think about how to generalize and simplify your world model. The game mechanics are very simple—much simpler than your current world model. This is a visual puzzle, so inspect the visual clues with your own eyes. Think about how to compress the model toward the simplest shared explanation of the game: remove distinctions not forced by evidence, replace level-specific or observation-shaped logic with shared parameterized rules, and keep the engine, state I/O, and planner aligned with one compact ontology. If reconstruction/rendering still needs ad-hoc exceptions, treat that as evidence that the underlying world state is modeled wrong or too literally. Prefer a planner that follows the same general mechanics and goal structure, not one tuned to this specific trajectory. After you change your world model:
+   ```
+   python3 verify_world_model_follower.py --till-level-attempt-step {LEVEL_INDEX} {ATTEMPT_INDEX} DIVERGE_STEP
+   python3 verify_main_planner.py
+   ```
+
+7. Set `FOLLOWER_STEP = DIVERGE_STEP`, then return to step 1.
+
+Continue until you have incorporated the entire attempt into your world model.

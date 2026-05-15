@@ -1,0 +1,1 @@
+You haven’t made any moves in the game since the last time I told you to continue until you reached the LEVEL_COMPLETED or GAME_OVER state. Please follow your prompt and make some meaningful moves. If you do not move, you will lose.

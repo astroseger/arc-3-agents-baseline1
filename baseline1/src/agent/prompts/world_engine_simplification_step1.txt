@@ -1,0 +1,9 @@
+The underlying game mechanics is very simple. The current model is likely explaining the observed data with machinery 
+that is too specific, too descriptive, and too close to the exact seen trajectories. Assume, by default, that the real game mechanics are simpler than your current explanation.
+
+Your job is to compress the ontology and dynamics, not preserve them—to find the simplest possible world model that explains the previous observations.
+Refactoring priority:
+1. Find where the engine is modeling observations too literally instead of modeling a small underlying rule.
+2. Remove distinctions that are not forced by evidence.
+3. Replace case-by-case behavior with parameterized shared mechanics.
+4. Push level-specific facts out of engine logic and into compact data/configuration when they are truly necessary

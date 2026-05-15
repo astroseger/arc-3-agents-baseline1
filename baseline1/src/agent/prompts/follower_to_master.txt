@@ -1,0 +1,7 @@
+Now switch from follower mode to master mode. You are now responsible for performing actions. Remember that the previous agent encountered difficulties: it may have underexplored the action space or missed visual clues indicating how to complete the level. Your world model should be stronger. Analyze previous attempts on this level and avoid repeating their mistakes. Think in terms of the world model and focus on completing the level.
+
+I will remind you of the main prompt; you should follow it.
+
+Main Prompt:
+
+{MAIN_PROMPT}

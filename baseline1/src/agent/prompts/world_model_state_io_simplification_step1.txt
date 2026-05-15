@@ -1,0 +1,14 @@
+The game is a visual puzzle. If `world_model_state_io.py` still contains ad-hoc reconstruction logic, renderer exceptions, or level-specific visual handling, treat that as evidence that you are still missing an important general mechanic or representation.
+
+Do a full review of the entire world model, with special focus on state reconstruction and state rendering. Find every place where the model:
+- reconstructs state with level-specific assumptions
+- uses one-off detectors or special visual-case handling
+- renders special cases instead of rendering from a unified internal state
+- stores observation-shaped details instead of a compact underlying world state
+- needs exceptions to explain what should be a regular visual pattern
+
+Make an explicit list of those ad-hoc elements. For each one, go back to the corresponding ASCII and PNG frames and inspect the evidence again with your own eyes. Ask what important mechanic, object family, state variable, visibility rule, or dynamic rule you are currently failing to represent cleanly.
+
+Assume these ad-hoc elements are not harmless implementation details. In a visual puzzle, they are often the clue that the current ontology is wrong or incomplete. Prefer the interpretation that turns special handling into a general rule.
+
+Simplify and generalise the world model. Update `world_model.md` together with the code so the textual and computational models stay aligned.

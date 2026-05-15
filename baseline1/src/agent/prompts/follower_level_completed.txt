@@ -1,0 +1,6 @@
+You have reached the `LEVEL_COMPLETED` state in the current attempt.
+Verify that you understand why this happened and incorporate that explanation into your world model. Inspect the result of the last step with your own eyes, looking for visual clues that may explain the goal of this level.
+Remember: the game mechanics are very simple. There should never be multiple level-specific conditions required to solve a level. If your world model contains such conditions, think about how to generalize them.
+Inspect the `LEVEL_COMPLETED` step visually and look for the simplest shared explanation.
+The final settled frame of the `LEVEL_COMPLETED` step is always the initial frame of the next level—ignore it for now.
+PNG inspection is mandatory whenever `LEVEL_COMPLETED` produces more than two frames. You should use the Animation-analysis subagent and also inspect such animations yourself. These animations may contain important clues for understanding why `LEVEL_COMPLETED` occurred and how to generalize the goal across levels.

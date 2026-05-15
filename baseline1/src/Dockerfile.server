@@ -1,0 +1,39 @@
+FROM python:3.13-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    ARC_SERVER_HOST=127.0.0.1 \
+    ARC_SERVER_PORT=8879 \
+    ARC_SCORECARD_PATH=/data/scorecard.txt \
+    ARC_FINAL_SCORECARD_PATH=/data/final_scorecard.txt \
+    ARC_SERVER_LOG_PATH=/data/server.log
+
+WORKDIR /app
+
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python -m pip install --no-cache-dir --upgrade pip \
+    && python -m pip install --no-cache-dir arc-agi==0.9.6
+
+COPY . /app
+
+RUN if getent group ${GROUP_ID} >/dev/null 2>&1; then \
+         existing_group="$(getent group ${GROUP_ID} | cut -d: -f1)"; \
+       else \
+         groupadd -g ${GROUP_ID} user; \
+         existing_group="user"; \
+       fi \
+    && useradd -m -u ${USER_ID} -g ${GROUP_ID} -s /bin/bash user \
+    && mkdir -p /data \
+    && chown -R ${USER_ID}:${GROUP_ID} /data /app/
+
+USER user
+
+CMD ["python", "server/server_competition.py"]
