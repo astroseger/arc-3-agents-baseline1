@@ -1,4 +1,4 @@
-# Results on ARC-3 Public Games
+# Results on ARC-3 Public Games (GPT-5.5/medium)
 
 Evaluation on the public [ARC-AGI-3](https://arcprize.org/arc-agi/3) games.
 
