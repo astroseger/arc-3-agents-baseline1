@@ -1,6 +1,6 @@
 # ARC-AGI-3 Baseline1 Agent
 
-This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent demonstrates that LLM-based coding agents can build and use executable world models for complex, low-dimensional, deterministic environments.
+This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent demonstrates that LLM-based coding agents can build and use executable world models for complex but low-dimensional and deterministic environments.
 
 The agent does not include hand-coded game-specific logic. It maintains a Python world model, verifies that model against previous observations, refactors it toward simpler abstractions, and uses the model for planning before acting.
 
