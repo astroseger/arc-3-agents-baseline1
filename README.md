@@ -22,9 +22,18 @@ With the default GPT-5.5 medium-reasoning configuration, one ChatGPT Pro subscri
 
 ## Results on ARC-AGI-3 Public Games
 
-### Baseline1: GPT-5.5 Medium Reasoning Effort
-
 We release the full runs so that the generated artifacts and world models can be inspected.
+
+### Baseline1: GPT-5.5 High Reasoning Effort
+
+The complete table and links to the full runs are available in [results/baseline1_gpt5.5_high/README.md](results/baseline1_gpt5.5_high/README.md).
+
+Summary:
+
+- Fully solved games: **14/25**
+- Mean score, averaging runs within each game first: **63.74%**
+
+### Baseline1: GPT-5.5 Medium Reasoning Effort
 
 The complete table and links to the full runs are available in [results/baseline1_gpt5.5_medium/README.md](results/baseline1_gpt5.5_medium/README.md).
 
@@ -33,7 +42,6 @@ Summary:
 - Fully solved games: **13/25**
 - Mean score, averaging runs within each game first: **52.63%**
 
-Preliminary experiments suggest that GPT-5.5 with high reasoning effort may perform significantly better. We will report those results when they are available.
 
 ### Baseline0.9: GPT-5.4 Medium Reasoning Effort
 
