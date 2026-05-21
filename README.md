@@ -1,8 +1,11 @@
 # ARC-AGI-3 Baseline1 Agent
+This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent is an LLM-based coding agent that builds an executable Python world model from observations, verifies that model against previous transitions, refactors it toward simpler abstractions, and plans through the model before acting.
 
-This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent demonstrates that LLM-based coding agents can build and use executable world models for complex but low-dimensional and deterministic environments.
+The agent does **not** contain game-specific code, game-specific prompts, hand-coded heuristics, hidden solutions, or any other game-specific information. It is designed to be general within the ARC-AGI-3 universe: the same agent and prompts are used across games.
 
-The agent does not include hand-coded game-specific logic. It maintains a Python world model, verifies that model against previous observations, refactors it toward simpler abstractions, and uses the model for planning before acting.
+During evaluation, each game is played as a single recorded playthrough. The agent starts from a fresh workspace, sees the target game only once, and has no access to previous playthrough-specific files, logs, or conversation state. It cannot restart the whole game to obtain a better trajectory and cannot return to previously completed levels. 
+
+Under these constraints, we believe `baseline1` should be considered eligible for the ARC-AGI-3 main leaderboard. The system is ARC-AGI-3-general rather than game-specific: it is designed for the ARC-AGI-3 interaction setting, but it is not tailored to any individual public game.
 
 ## Paper
 
@@ -60,4 +63,4 @@ Summary:
 
 ## Generalization
 
-We expect the `baseline1` agent to generalize to the validation set because it does not contain game-specific code or game-specific prompts. However, this remains to be tested directly on the private validation set. We also cannot rule out that information about public games is already present in GPT-5.5's training data and that the agent may indirectly benefit from that information.
+We expect `baseline1` to generalize to the private validation set because it does not contain game-specific code, game-specific prompts, hand-coded heuristics, or hidden information about individual games. However, this remains an empirical question that can only be settled by evaluation on the private validation set. We also cannot rule out the possibility that information about the public games is already present in the base LLM's training data and that the agent may indirectly benefit from that information.
