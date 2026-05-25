@@ -64,3 +64,7 @@ Summary:
 ## Generalization
 
 We expect `baseline1` to generalize to the private validation set because it does not contain game-specific code, game-specific prompts, hand-coded heuristics, or hidden information about individual games. However, this remains an empirical question that can only be settled by evaluation on the private validation set. We also cannot rule out the possibility that information about the public games is already present in the base LLM's training data and that the agent may indirectly benefit from that information.
+
+## License
+
+This project is released under the MIT License. See [LICENSE](LICENSE) for details.
