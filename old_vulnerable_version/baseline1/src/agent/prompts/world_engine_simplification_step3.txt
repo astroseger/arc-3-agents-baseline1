@@ -1,0 +1,17 @@
+Now step back and review the world model at the conceptual level.
+
+The overall goal of the game is the same across all levels and should be expressible in one short sentence. Ask whether your current world model makes that goal clear in such a simple form, or whether it is buried under level-specific descriptions and unnecessary machinery.
+
+Likewise, the full game mechanics should be explainable in a few short sentences. Ask whether your current world model reaches that level of conceptual simplicity, or whether it is still too descriptive, too fragmented, or too tied to the exact observed trajectories.
+
+Look for opportunities to simplify the model at the level of concepts, not just implementation details. Ask:
+- what is the simplest statement of the game's core objective?
+- what is the simplest statement of the core mechanics that generate all solved levels?
+- which parts of the current ontology are not needed if the game is described more cleanly?
+- which distinctions, entities, or rules exist only because the model grew incrementally instead of being designed around a compact general explanation?
+
+To do this well, you may need to go back to frames from earlier levels and inspect them again with your own eyes. Re-check whether earlier levels really require the current concepts, or whether a simpler explanation could cover them as well. Ask what the level is visibly teaching, what the simplest mechanic is, and how later levels might just be extensions of the same underlying rule.
+
+Test each conceptual simplification hypothesis against the recorded observations. If a simpler explanation still fits the evidence, prefer it. Simplify and generalise the world model further.
+
+Update `world_model.md` together with the computational world model. If you simplify the conceptual explanation of the game, reflect that same simplification in the textual model, not just in the code.

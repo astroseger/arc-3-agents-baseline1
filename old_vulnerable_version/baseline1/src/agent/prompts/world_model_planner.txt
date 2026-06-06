@@ -1,0 +1,17 @@
+Refactor the main planner now.
+
+Review the current logic in `world_model_main_planner.py` across all solved levels and ask whether it is becoming too level-specific, too custom, or too dependent on special-case search code. The main planner should be as general as possible across levels. Later levels should preferably reuse the same main planning logic, with only minimal parameterisation or small auxiliary extensions when truly necessary.
+
+Look for every place where the main planner:
+- contains level-specific heuristics or branching logic
+- depends on ad-hoc assumptions about one level's mechanics
+- uses custom goal handling that should instead come from the world model
+- has grown complicated because the world model is still unclear
+
+For each such case, ask whether the main planner can be simplified by improving the world model, by expressing goals more cleanly, or by replacing special handling with one shared planning framework.
+
+Also review the main planning algorithm itself. Ask whether a simpler, faster, or more robust planner would work better now that the world model is becoming cleaner. Prefer a main planner that is easy to understand, easy to verify, and reusable across levels over one that is heavily tuned to individual situations.
+
+The game is a simple visual puzzle. The level goal is always the same at a high level, even if the mechanics vary. Ask whether the planner reflects that shared structure clearly. If not, simplify and generalise it.
+
+Update `world_model.md` together with the main planner. If you change how goals, actions, or planning abstractions are represented, keep the textual model aligned with the code.

@@ -1,0 +1,9 @@
+Review the first-level world model, including `world_model.md`, `world_model_engine.py`, `world_model_state_io.py`, and `world_model_main_planner.py`.
+
+Assume the real game mechanics are simpler than the current implementation. Identify every ad-hoc rule, reconstruction heuristic, renderer exception, special object distinction, planner shortcut, or overly literal modeling of observed frames. Treat each one as evidence that the ontology, state representation, dynamics, visibility rules, or goal abstraction may be wrong or incomplete.
+
+Re-check the relevant ASCII/PNG frames and ask what simpler mechanic, object family, state variable, or parameterized rule would make the special handling unnecessary. Remove distinctions not forced by evidence and replace case-by-case behavior with shared rules.
+
+The level objective and core mechanics should be explainable in a few short sentences. Simplify the code and `world_model.md` together so reconstruction, rendering, engine transitions, and planning all follow from the same clean underlying model. Test simpler hypotheses against recorded observations, then keep the simplest explanation that fits.
+
+After each modification of the world model, run `python3 verify_world_model.py`.

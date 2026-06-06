@@ -1,0 +1,1 @@
+You have been interrupted. Please review your world model, review your reasoning logs, review the current state of the game. Think me about possible future action. Report what do you think about the current situation.

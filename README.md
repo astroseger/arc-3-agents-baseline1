@@ -3,7 +3,7 @@ This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent is
 
 The agent does **not** contain game-specific code, game-specific prompts, hand-coded heuristics, hidden solutions, or any other game-specific information. It is designed to be general within the ARC-AGI-3 universe: the same agent and prompts are used across games.
 
-During evaluation, each game is played as a single recorded playthrough. The agent starts from a fresh workspace, sees the target game only once, and has no access to previous playthrough-specific files, logs, or conversation state. It cannot restart the whole game to obtain a better trajectory and cannot return to previously completed levels. 
+During evaluation, each game is played as a single recorded playthrough. The agent starts from a fresh workspace, sees the target game only once, and has no access to previous playthrough-specific files, logs, or conversation state. It cannot restart the whole game to obtain a better trajectory and cannot return to previously completed levels.
 
 Under these constraints, we believe `baseline1` should be considered eligible for the ARC-AGI-3 main leaderboard. The system is ARC-AGI-3-general rather than game-specific: it is designed for the ARC-AGI-3 interaction setting, but it is not tailored to any individual public game.
 
@@ -15,51 +15,39 @@ For more detail, see our arXiv paper:
 
 If you use this repository or the released results, please cite the paper.
 
+### Preventing unintended information access
+
+Earlier versions had information-leakage vulnerabilities. For details, see the “Preventing unintended information access” section of the accompanying article.
+
+In our audit of historical runs of the baseline1 agent, we found only one game in which the agent clearly appears to have benefited from such vulnerabilities. In the GPT-5.5-medium run of dc22, the agent appears to have downloaded a public scorecard or related external material. In a few other runs, agents attempted to use web search, but we found no evidence that these attempts produced useful external information.
+
+To avoid mixing vulnerable and fixed evaluations, we discarded all results produced with the older system and did not use them in the article, except when explicitly discussing leakage examples. The old agent, old results, and full run logs remain available for transparency in the [old_vulnerable_version](old_vulnerable_version) folder.
+
+The current version closes the observed leakage channels. The agent container no longer contains the real game name in files, process arguments, environment variables, or API-visible services. It also no longer contains references to ARC or ARC-AGI. The agent container has no general internet access. It can reach OpenAI services only through a separate proxy container whose allowlist is restricted to OpenAI endpoints. Codex web search is disabled.
+
 ## Agent
 
-The agent implementation, run instructions, and system requirements are documented in [baseline1/README.md](baseline1/README.md).
+The agent implementation, run instructions, and system requirements are documented in [secure_baseline1/README.md](secure_baseline1/README.md).
 
-To verify that the agent is intended to be game-general within ARC-AGI-3 and does not contain game-specific hidden information, see [baseline1/AGENT.md](baseline1/AGENT.md).
+To verify that the agent is intended to be game-general within ARC-AGI-3 and does not contain game-specific hidden information, see [secure_baseline1/AGENT.md](secure_baseline1/AGENT.md).
 
-With the default GPT-5.5 medium-reasoning configuration, one ChatGPT Pro subscription (200 USD) is enough to run full experiments for roughly 2-8 games, depending on game difficulty, within the weekly Codex limit for that account.
+With the default GPT-5.5 high-reasoning configuration, one ChatGPT Pro subscription (200 USD) is enough to run full experiments for roughly 2-8 games, depending on game difficulty, within the weekly Codex limit for that account.
 
 ## Results on ARC-AGI-3 Public Games
 
 We release the full runs so that the generated artifacts and world models can be inspected.
 
-### Baseline1: GPT-5.5 High Reasoning Effort
+The complete table and links to the full runs are available in [results/README.md](results/README.md).
 
-The complete table and links to the full runs are available in [results/baseline1_gpt5.5_high/README.md](results/baseline1_gpt5.5_high/README.md).
+#### GPT-5.5 High Reasoning Effort, run01
 
-Summary:
+fully solved games: **15/25**
+mean per-game RHAE: **58.12%**
 
-- Fully solved games: **14/25**
-- Mean score, averaging runs within each game first: **63.74%**
+#### GPT-5.4 High Reasoning Effort, run01
 
-### Baseline1: GPT-5.5 Medium Reasoning Effort
-
-The complete table and links to the full runs are available in [results/baseline1_gpt5.5_medium/README.md](results/baseline1_gpt5.5_medium/README.md).
-
-Summary:
-
-- Fully solved games: **13/25**
-- Mean score, averaging runs within each game first: **52.63%**
-
-
-### Baseline0.9: GPT-5.4 Medium Reasoning Effort
-
-We also include results for an earlier preliminary version of the agent, which we call `baseline0.9`. These runs used GPT-5.4 with medium reasoning effort.
-
-`baseline1` is a slightly improved version of this agent: it simplifies the world-model interfaces and fixes several bugs in the server/client code. We have not yet isolated the effect of these changes, so the difference between `baseline0.9` with GPT-5.4 and `baseline1` with GPT-5.5 should not be interpreted as a pure model comparison. We expect most of the difference to come from the base LLM, but this still needs to be verified.
-
-These results are kept here because they were used in the first arXiv version of the paper.
-
-The complete table and links to the full runs are available in [results/baseline0.9_gpt5.4_medium/README.md](results/baseline0.9_gpt5.4_medium/README.md).
-
-Summary:
-
-- Fully solved games: **7/25**
-- Mean score, averaging runs within each game first: **34.69%**
+fully solved games: **8/25**
+mean per-game RHAE: **41.29%**
 
 ## Generalization
 
