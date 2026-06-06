@@ -12,12 +12,7 @@ To run the system you need:
 - an ARC API key available in the environment as `ARC_API_KEY`;
 - a ChatGPT Pro subscription.
 
-With the default GPT-5.5/medium configuration, one ChatGPT Pro subscription (200 USD) is enough to run a full experiment for roughly 2-8 games within the Codex weekly limit for that account.
-
-Warning: the current system does not have a graceful recovery mechanism for fatal Codex errors. If a fatal Codex error appears, the agent stops and cannot automatically recover the run. Known failure cases include:
-
-- Codex can occasionally crash with a "model at model capacity limits" error. In my experience, this happened about twice in a month.
-- A run can stop when the Codex account reaches its 5-hour or weekly usage limit. In my experience, with a single ChatGPT Pro subscription (200 USD), you can safely run two games in parallel without hitting the 5-hour limit.
+With the default GPT-5.5/high configuration, one ChatGPT Pro subscription (200 USD) is enough to run a full experiment for roughly 2-8 games within the Codex weekly limit for that account.
 
 ## System Requirements
 
