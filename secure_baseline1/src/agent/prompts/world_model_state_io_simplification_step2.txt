@@ -1,0 +1,16 @@
+Continue the simplification pass, now focusing on why ad-hoc logic appears in state reconstruction and rendering at all.
+
+For every remaining reconstruction heuristic, renderer exception, level-specific detector, or observation-specific patch, ask:
+- what general world fact is this trying to recover?
+- what shared object family or state variable would make this special handling unnecessary?
+- is this really a rendering problem, or is the internal state representation missing something important?
+- is this really a reconstruction problem, or am I trying to infer from frames something the engine should already represent more cleanly?
+- is this distinction forced by evidence, or is it an artifact of incremental debugging?
+
+Re-check the corresponding frames carefully. Small visual details matter. If the renderer needs an exception to match a frame, or reconstruction needs a special detector to explain a feature, that feature may be the missing mechanic or hidden state that explains the level more generally.
+
+Prefer one shared ontology across levels. Reuse the same object families, state variables, and visibility logic whenever the evidence allows it. Replace level-specific reconstruction/rendering logic with shared parameterised rules whenever possible.
+
+Do not patch over visual mismatches. Use them as evidence. Test simpler and more general hypotheses against the recorded observations, then remove the ad-hoc logic that those hypotheses make unnecessary.
+
+Update `world_model.md`, `world_model_state_io.py`, and any affected engine/planner logic together.

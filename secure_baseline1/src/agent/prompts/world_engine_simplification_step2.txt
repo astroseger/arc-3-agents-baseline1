@@ -1,0 +1,15 @@
+Continue with aggressive generalisation and simplification of the world model.
+
+Do another full review of the world model engine and identify every mechanic, rule, object type, state field, or transition that looks overly complicated, overly specific, level-dependent, or ad hoc.
+
+Then go through that list one by one and ask:
+- can this be expressed as a simpler shared rule?
+- can this be reduced to a parameter of an existing mechanic?
+- is this distinction actually forced by evidence?
+- is this modeling observed trajectories too literally instead of modeling a small underlying rule?
+
+Prefer simpler mechanics, fewer concepts, and fewer exceptions. Replace case-by-case behaviour with shared parameterised rules whenever possible. Push truly level-specific facts out of engine logic and into compact data/configuration.
+
+Do not defend the current model. Assume the real mechanics are simpler than your current explanation unless the evidence clearly forces complexity. Test the simpler hypotheses against the recorded observations and keep simplifying until this pass yields no further meaningful reduction.
+
+Update `world_model.md` together with the computational world model. If you simplify, merge, rename, remove, or reinterpret any mechanic, object family, state variable, or special case in the engine, reflect the same change in `world_model.md` so the textual model and the implemented model stay aligned.

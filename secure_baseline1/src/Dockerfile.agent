@@ -1,0 +1,95 @@
+# Dockerfile.codex
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    git \
+    bash \
+    sudo \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npm i -g @openai/codex@0.128.0
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3-numpy \
+    python3-scipy \
+    python3-sympy \
+    python3-mpmath \
+    python3-networkx \
+    python3-mpi4py \
+    python3-jsonschema \
+    python3-json-pointer \
+    python3-jsonpatch \
+    python3-pydantic \
+    python3-pyrsistent \
+    python3-attr \
+    python3-typeguard \
+    python3-typing-extensions \
+    python3-lark \
+    python3-protobuf \
+    python3-yaml \
+    python3-matplotlib \
+    python-matplotlib-data \
+    python3-contourpy \
+    python3-cycler \
+    python3-kiwisolver \
+    python3-pyparsing \
+    python3-dateutil \
+    python3-pil \
+    python3-pydot \
+    python3-fonttools \
+    python3-ufolib2 \
+    python3-olefile \
+    python3-requests \
+    python3-opencv \
+    python3-skimage \
+    python3-imageio \
+    python3-tifffile \
+    python3-pandas \
+    python3-sklearn \
+    python3-joblib \
+    python3-tqdm \
+    python3-rich \
+    python3-z3 \
+    python3-pycosat \
+    python3-pulp \
+    python3-shapely \
+    python3-rtree \
+    python3-pygraphviz \
+    graphviz \
+    python3-statsmodels \
+    python3-numexpr \
+    python3-h5py \
+    python3-tables \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
+# Ubuntu 24.04 images may already contain user "ubuntu" with UID 1000.
+# Remove it to avoid UID/name conflicts.
+RUN if id ubuntu >/dev/null 2>&1; then userdel -r ubuntu || true; fi \
+    && if getent group ubuntu >/dev/null 2>&1; then groupdel ubuntu || true; fi \
+    && if getent group ${GROUP_ID} >/dev/null 2>&1; then \
+         existing_group="$(getent group ${GROUP_ID} | cut -d: -f1)"; \
+       else \
+         groupadd -g ${GROUP_ID} user; \
+         existing_group="user"; \
+       fi \
+    && useradd -m -u ${USER_ID} -g ${GROUP_ID} -s /bin/bash user \
+    && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/user \
+    && chmod 0440 /etc/sudoers.d/user \
+    && mkdir -p /home/user/.codex \
+    && chown -R ${USER_ID}:${GROUP_ID} /home/user/.codex
+
+USER user
+WORKDIR /home/user/run
+
+ENV CODEX_HOME=/home/user/.codex
+
+CMD ["/bin/bash"]

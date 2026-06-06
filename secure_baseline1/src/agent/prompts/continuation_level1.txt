@@ -1,0 +1,1 @@
+Remember this game is a simple visual puzzle. The correct solution path should become fairly obvious after a few exploratory moves. Re-check the images with your eyes, look for the most visually salient pattern or mechanic, and ask what the level is clearly trying to teach. Prefer the simplest interpretation over elaborate hidden rules. Try to simplify your world model.
