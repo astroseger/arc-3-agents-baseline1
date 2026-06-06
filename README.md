@@ -3,7 +3,7 @@ This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent is
 
 The agent does **not** contain game-specific code, game-specific prompts, hand-coded heuristics, hidden solutions, or any other game-specific information. It is designed to be general within the ARC-AGI-3 universe: the same agent and prompts are used across games.
 
-During evaluation, each game is played as a single recorded playthrough. The agent starts from a fresh workspace, sees the target game only once, and has no access to previous playthrough-specific files, logs, or conversation state. It cannot restart the whole game to obtain a better trajectory and cannot return to previously completed levels. 
+During evaluation, each game is played as a single recorded playthrough. The agent starts from a fresh workspace, sees the target game only once, and has no access to previous playthrough-specific files, logs, or conversation state. It cannot restart the whole game to obtain a better trajectory and cannot return to previously completed levels.
 
 Under these constraints, we believe `baseline1` should be considered eligible for the ARC-AGI-3 main leaderboard. The system is ARC-AGI-3-general rather than game-specific: it is designed for the ARC-AGI-3 interaction setting, but it is not tailored to any individual public game.
 
@@ -31,7 +31,7 @@ The agent implementation, run instructions, and system requirements are document
 
 To verify that the agent is intended to be game-general within ARC-AGI-3 and does not contain game-specific hidden information, see [secure_baseline1/AGENT.md](secure_baseline1/AGENT.md).
 
-With the default GPT-5.5 medium-reasoning configuration, one ChatGPT Pro subscription (200 USD) is enough to run full experiments for roughly 2-8 games, depending on game difficulty, within the weekly Codex limit for that account.
+With the default GPT-5.5 high-reasoning configuration, one ChatGPT Pro subscription (200 USD) is enough to run full experiments for roughly 2-8 games, depending on game difficulty, within the weekly Codex limit for that account.
 
 ## Results on ARC-AGI-3 Public Games
 

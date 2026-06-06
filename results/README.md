@@ -4,13 +4,12 @@ Evaluation on the public [ARC-AGI-3](https://arcprize.org/arc-agi/3) games.
 
 ## Setup
 
-- agent baseline1, base LLM GPT-5.5 with high reasoning effort.
 - The agent plays each game from scratch (no cross-game learning).
 - The agent cannot return to previously solved levels (`GAME_RESET` is forbidden).
 - Each run is a single playthrough of a game.
 
 ## Interruption Policy
-As described in the article, some runs where interrupted because of techical failures or 
+As described in the article, some runs were interrupted because of technical failures or
 simply because of hitting Codex usage limits on the OpenAI
 subscription used for the experiment. We report these runs as interrupted
 and do not restart them. Restarting after an interruption would conflict with the

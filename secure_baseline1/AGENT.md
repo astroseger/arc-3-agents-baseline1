@@ -7,7 +7,7 @@ Our agent is based on unsandboxed Codex. In principle, this means the Codex proc
 - Before each new agent run, we remove previous Codex account state except for required authentication data such as `auth.json`.
 - The [`src/agent`](src/agent) folder contains all information available to the agent.
 
-# Contents of [`src/agent`](src/agent)
+## Contents of [`src/agent`](src/agent)
 
 [`agent.py`](src/agent/agent.py) is the external controller. It prepares the run directory, starts Codex, sends prompts to Codex, runs the client, inspects progress, and decides which prompt to send next.
 
