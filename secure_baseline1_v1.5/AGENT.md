@@ -33,7 +33,7 @@ For a more agent-facing explanation of these files, read [`prompts/main_prompt.m
 - [`verify_main_planner.py`](src/agent/workspace_init/verify_main_planner.py) - checks planner success on completed levels.
 - [`run_main_planner.py`](src/agent/workspace_init/run_main_planner.py) - runs the main planner.
 - [`run_aux_planner.py`](src/agent/workspace_init/run_aux_planner.py) - runs auxiliary planners.
-- [`plan_executor.py`](src/agent/workspace_init/plan_executor.py) - executes planned actions in both game and model.
+- [`plan_executor.py`](src/agent/workspace_init/plan_executor.py) - executes planned actions in both game and model. (not provided in this version!)
 - [`plot_initial_full_frames.py`](src/agent/workspace_init/plot_initial_full_frames.py) - renders reconstructed full-frame maps.
 - [`generate_animation_analysis_prompt.py`](src/agent/workspace_init/generate_animation_analysis_prompt.py) - creates animation-analysis prompts.
 
