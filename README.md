@@ -39,7 +39,7 @@ We have developed a slightly improved version of the original `secure_baseline1`
 
 The new version is available in the [secure_baseline1_v1.5](secure_baseline1_v1.5) folder.
 
-Note that this version does not include a plan executor. It was developed as part of a new study that required a baseline1-like system without one. Results with a plan executor may be higher, and we plan to test this in the coming weeks.
+Note that this version does not include instructions for using a plan executor in its prompt. It was developed as part of a new study that required a `baseline1`-like system without a plan executor. Results with a plan executor may be higher, and we plan to evaluate this in the coming weeks.
 
 ## Results on ARC-AGI-3 Public Games
 
