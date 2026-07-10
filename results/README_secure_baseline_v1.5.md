@@ -31,7 +31,7 @@ Full runs, including all generated artifacts, are available here: [secure_baseli
 | cd82 | 6/6 | 100.00% | 168 | - | normal termination |
 | cn04 | 6/6 | 87.36% | 611 | - | normal termination |
 | dc22 | 5/6 | 71.43% | 513 | 1500 | normal termination |
-| ft09 | 4/6 | 47.62% | 49 | 824 | interrupted |
+| ft09 | 4/6 | 47.62% | 49 | 1500 | normal termination |
 | g50t | 7/7 | 85.86% | 646 | - | normal termination |
 | ka59 | 7/7 | 100.00% | 386 | - | normal termination |
 | lf52 | 10/10 | 90.36% | 1766 | - | normal termination |
