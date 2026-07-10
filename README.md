@@ -37,7 +37,7 @@ With the default GPT-5.5 high-reasoning configuration, one ChatGPT Pro subscript
 
 We have developed a slightly improved version of the original `secure_baseline1` agent, with significantly simplified prompts.
 
-The new version is available in the `secure_baseline1_v1.5` folder.
+The new version is available in the [secure_baseline1_v1.5](secure_baseline1_v1.5) folder.
 
 Note that this version does not include a plan executor. It was developed as part of a new study that required a baseline1-like system without one. Results with a plan executor may be higher, and we plan to test this in the coming weeks.
 
@@ -45,7 +45,7 @@ Note that this version does not include a plan executor. It was developed as par
 
 We release the full runs so that the generated artifacts and world models can be inspected.
 
-The complete table and links to the full runs are available in [results/README.md](results/README.md).
+The complete results table, along with links to all individual runs, is available in [results/README.md](results/README.md) for the secure_baseline1 agent and in [results/README_secure_baseline_v1.5.md](results/README_secure_baseline_v1.5.md) for the secure_baseline1_v1.5 agent.
 
 #### GPT-5.5 xHigh Reasoning Effort, `secure_baseline1_v1.5`, run01
 fully solved games: **20/25**

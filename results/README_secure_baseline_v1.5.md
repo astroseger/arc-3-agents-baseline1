@@ -22,7 +22,7 @@ For the simulations reported here, we ensured that sufficient resources were ava
 
 ### GPT-5.5, xhigh reasoning effort, run01
 
-Full runs, including all generated artifacts, are available here: [secure_baseline1_v1.5_gpt5.5_xhigh_run01.tar.gz](). The agent workspaces are located in the `agent_run` folders; these include the world models created by the agent, which may be interesting to inspect.
+Full runs, including all generated artifacts, are available here: [secure_baseline1_v1.5_gpt5.5_xhigh_run01.tar.gz](https://www.dropbox.com/scl/fi/wy4bcpbr0rdcq1lxzw1hb/secure_baseline1_v1.5_gpt5.5_xhigh_run01.tar.gz?rlkey=m8npt7z3w60h2ig2rxpu7ttpj&st=lt17ano9&dl=0). The agent workspaces are located in the `agent_run` folders; these include the world models created by the agent, which may be interesting to inspect.
 
 | Game | Levels solved | Score | Steps on Solved | Steps on Unsolved | Run Status |
 |---|---:|---:|---:|---:|---|
