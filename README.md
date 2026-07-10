@@ -25,7 +25,7 @@ To avoid mixing vulnerable and fixed evaluations, we discarded all results produ
 
 The current version closes the observed leakage channels. The agent container no longer contains the real game name in files, process arguments, environment variables, or API-visible services. It also no longer contains references to ARC or ARC-AGI. The agent container has no general internet access. It can reach OpenAI services only through a separate proxy container whose allowlist is restricted to OpenAI endpoints. Codex web search is disabled.
 
-## Agent
+## Agent original version
 
 The agent implementation, run instructions, and system requirements are documented in [secure_baseline1/README.md](secure_baseline1/README.md).
 
@@ -33,18 +33,30 @@ To verify that the agent is intended to be game-general within ARC-AGI-3 and doe
 
 With the default GPT-5.5 high-reasoning configuration, one ChatGPT Pro subscription (200 USD) is enough to run full experiments for roughly 2-8 games, depending on game difficulty, within the weekly Codex limit for that account.
 
+## Agent v1.5
+
+We have developed a slightly improved version of the original `secure_baseline1` agent, with significantly simplified prompts.
+
+The new version is available in the `secure_baseline1_v1.5` folder.
+
+Note that this version does not include a plan executor. It was developed as part of a new study that required a baseline1-like system without one. Results with a plan executor may be higher, and we plan to test this in the coming weeks.
+
 ## Results on ARC-AGI-3 Public Games
 
 We release the full runs so that the generated artifacts and world models can be inspected.
 
 The complete table and links to the full runs are available in [results/README.md](results/README.md).
 
-#### GPT-5.5 High Reasoning Effort, run01
+#### GPT-5.5 xHigh Reasoning Effort, `secure_baseline1_v1.5`, run01
+fully solved games: **20/25**
+mean per-game RHAE: **82.01%**
+
+#### GPT-5.5 High Reasoning Effort, `secure_baseline1`, run01
 
 fully solved games: **15/25**
 mean per-game RHAE: **58.12%**
 
-#### GPT-5.4 High Reasoning Effort, run01
+#### GPT-5.4 High Reasoning Effort, `secure_baseline1` , run01
 
 fully solved games: **8/25**
 mean per-game RHAE: **41.29%**
