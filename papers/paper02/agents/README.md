@@ -4,7 +4,7 @@ This directory contains the runnable agent packages used in the study.
 
 ## Agents
 
-| Package | World-model treatment | Simplification | Verification | Follow-up changes |
+| Package | World-model treatment | Simplification | Verification | Version-specific changes |
 |---|---|---:|---:|---|
 | [`twma_v1.2`](twma_v1.2) | Textual model | No | No | — |
 | [`ewma_v1.2`](ewma_v1.2) | Flexible-interface executable model and planner | No | No | — |

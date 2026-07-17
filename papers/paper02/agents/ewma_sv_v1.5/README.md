@@ -1,6 +1,6 @@
 # `ewma_sv_v1.5`
 
-This directory contains the v1.5 fixed-interface verification follow-up agent and the Docker automation used to run it. See [AGENT.md](AGENT.md) for its implementation and [the parent README](../README.md) for the complete agent family and analysis utilities.
+This directory contains the v1.5 fixed-interface verification agent and the Docker automation used to run it. See [AGENT.md](AGENT.md) for its implementation and [the parent README](../README.md) for the complete agent family and analysis utilities.
 
 ## Variant
 

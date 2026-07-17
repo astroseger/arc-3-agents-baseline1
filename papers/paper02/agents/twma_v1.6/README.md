@@ -1,6 +1,6 @@
 # `twma_v1.6`
 
-This directory contains the v1.6 textual-world-model follow-up agent and the Docker automation used to run it. See [AGENT.md](AGENT.md) for its implementation and [the parent README](../README.md) for the complete agent family and analysis utilities.
+This directory contains the v1.6 textual-world-model agent and the Docker automation used to run it. See [AGENT.md](AGENT.md) for its implementation and [the parent README](../README.md) for the complete agent family and analysis utilities.
 
 ## Variant
 
