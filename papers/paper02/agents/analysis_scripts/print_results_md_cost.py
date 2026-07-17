@@ -103,26 +103,12 @@ def first_run_from_scorecard(scorecard: dict[str, Any]) -> dict[str, Any]:
     raise ValueError("Could not determine run details from scorecard environments")
 
 
-def interrupted_level_steps(run: dict[str, Any]) -> int:
-    level_actions = run.get("level_actions")
-    if isinstance(level_actions, list) and level_actions:
-        interrupted_level_index = int(run.get("levels_completed", 0) or 0)
-        if interrupted_level_index < len(level_actions):
-            return int(level_actions[interrupted_level_index] or 0)
-        return int(level_actions[-1] or 0)
-    return int(run.get("actions", 0) or 0)
-
-
 def steps_on_solved(run: dict[str, Any]) -> int:
     levels_completed = int(run.get("levels_completed", 0) or 0)
     level_actions = run.get("level_actions")
     if isinstance(level_actions, list):
         return sum(int(actions or 0) for actions in level_actions[:levels_completed])
     return int(run.get("actions", 0) or 0) if run.get("state") == "WIN" else 0
-
-
-def steps_on_last(run: dict[str, Any]) -> int:
-    return interrupted_level_steps(run)
 
 
 def cost_tokens_for_game(cost_payload: dict[str, Any], game: str) -> str:
@@ -150,7 +136,6 @@ def table_row(runs_dir: Path, game: str, game_cost_tokens: str) -> list[str]:
         f"{levels_solved}/{total_levels}",
         format_score(scorecard.get("score")),
         str(steps_on_solved(run)),
-        "-" if levels_solved == total_levels else str(steps_on_last(run)),
         game_cost_tokens,
     ]
 
@@ -258,12 +243,12 @@ def print_results_md(runs_dirs: list[Path]) -> None:
     print("# Results")
     print()
     if show_run_index:
-        print("| Game | Run index | Levels solved | Score | Steps on Solved | Steps on Unsolved | Cost Tokens (Millions) |")
-        print("|---|---:|---:|---:|---:|---:|---:|")
+        print("| Game | Run index | Levels solved | Score | Steps on Solved | Cost Tokens (Millions) |")
+        print("|---|---:|---:|---:|---:|---:|")
         sorted_rows = sorted(rows)
     else:
-        print("| Game | Levels solved | Score | Steps on Solved | Steps on Unsolved | Cost Tokens (Millions) |")
-        print("|---|---:|---:|---:|---:|---:|")
+        print("| Game | Levels solved | Score | Steps on Solved | Cost Tokens (Millions) |")
+        print("|---|---:|---:|---:|---:|")
         sorted_rows = [[row[0], *row[2:]] for row in sorted(rows)]
 
     for row in sorted_rows:
