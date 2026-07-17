@@ -1,5 +1,6 @@
-# ARC-AGI-3 Baseline1 Agent
-This repository releases our `baseline1` agent for ARC-AGI-3 games. The agent is an LLM-based coding agent that builds an executable Python world model from observations, verifies that model against previous transitions, refactors it toward simpler abstractions, and plans through the model before acting.
+# Supporting materials for “Executable World Models for ARC-AGI-3 in the Era of Coding Agents”
+
+This directory contains the agent implementation, results, and supporting materials for the article. The released `baseline1` agent is an LLM-based coding agent that builds an executable Python world model from observations, verifies that model against previous transitions, refactors it toward simpler abstractions, and plans through the model before acting.
 
 The agent does **not** contain game-specific code, game-specific prompts, hand-coded heuristics, hidden solutions, or any other game-specific information. It is designed to be general within the ARC-AGI-3 universe: the same agent and prompts are used across games.
 
@@ -13,7 +14,7 @@ For more detail, see our arXiv paper:
 
 - [Executable World Models for ARC-AGI-3 in the Era of Coding Agents](https://arxiv.org/abs/2605.05138)
 
-If you use this repository or the released results, please cite the paper.
+If you use this agent or the released results, please cite the paper.
 
 ### Preventing unintended information access
 
@@ -25,7 +26,7 @@ To avoid mixing vulnerable and fixed evaluations, we discarded all results produ
 
 The current version closes the observed leakage channels. The agent container no longer contains the real game name in files, process arguments, environment variables, or API-visible services. It also no longer contains references to ARC or ARC-AGI. The agent container has no general internet access. It can reach OpenAI services only through a separate proxy container whose allowlist is restricted to OpenAI endpoints. Codex web search is disabled.
 
-## Agent original version
+## Agent
 
 The agent implementation, run instructions, and system requirements are documented in [secure_baseline1/README.md](secure_baseline1/README.md).
 
@@ -33,23 +34,11 @@ To verify that the agent is intended to be game-general within ARC-AGI-3 and doe
 
 With the default GPT-5.5 high-reasoning configuration, one ChatGPT Pro subscription (200 USD) is enough to run full experiments for roughly 2-8 games, depending on game difficulty, within the weekly Codex limit for that account.
 
-## Agent v1.5
-
-We have developed a slightly improved version of the original `secure_baseline1` agent, with significantly simplified prompts.
-
-The new version is available in the [secure_baseline1_v1.5](secure_baseline1_v1.5) folder.
-
-Note that this version does not include instructions for using a plan executor in its prompt. It was developed as part of a new study that required a `baseline1`-like system without a plan executor. Results with a plan executor may be higher, and we plan to evaluate this in the coming weeks.
-
 ## Results on ARC-AGI-3 Public Games
 
 We release the full runs so that the generated artifacts and world models can be inspected.
 
-The complete results table, along with links to all individual runs, is available in [results/README.md](results/README.md) for the secure_baseline1 agent and in [results/README_secure_baseline_v1.5.md](results/README_secure_baseline_v1.5.md) for the secure_baseline1_v1.5 agent.
-
-#### GPT-5.5 xHigh Reasoning Effort, `secure_baseline1_v1.5`, run01
-fully solved games: **20/25**
-mean per-game RHAE: **82.01%**
+The complete results table, along with links to all individual runs, is available in [results/README.md](results/README.md).
 
 #### GPT-5.5 High Reasoning Effort, `secure_baseline1`, run01
 
@@ -67,4 +56,4 @@ We expect `baseline1` to generalize to the private validation set because it doe
 
 ## License
 
-This project is released under the MIT License. See [LICENSE](LICENSE) for details.
+This project is released under the MIT License. See [LICENSE](../../LICENSE) for details.
