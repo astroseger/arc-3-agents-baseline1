@@ -1,6 +1,6 @@
 # ARC-AGI-3 agent implementations
 
-This directory contains the runnable agent packages used for the executable-world-model ablations and follow-up systems. It documents agent designs and tooling only; article results are not included here.
+This directory contains the runnable agent packages used in the study.
 
 ## Agents
 
@@ -20,8 +20,6 @@ Each package contains:
 - `AGENT.md`: treatment-specific architecture;
 - `run_config.yaml`: accounts, games, model, effort, and run tag;
 - `src/`: controller, prompts, client/server code, Docker files, and any treatment-specific workspace utilities.
-
-All default configurations select the same 25 public games and four Codex account folders. The v1.2 and v1.5 packages default to `gpt-5.5`/`xhigh`; the v1.6 packages default to `gpt-5.6-sol`/`max`.
 
 ## Account capacity and parallel runs
 
