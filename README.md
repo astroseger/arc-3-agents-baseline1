@@ -1,6 +1,6 @@
 # ARC-AGI-3 General Agents
 
-This repository is the project page for our experiments with general coding agents that solve ARC-AGI-3 games. We study how textual and executable world models, simplification, and replay verification affect agent performance.
+This repository is the project page for our experiments with coding agents designed to be game-general within ARC-AGI-3. We develop and evaluate agent architectures, reasoning strategies, and tools for solving unfamiliar interactive games.
 
 ## General-agent setting
 
