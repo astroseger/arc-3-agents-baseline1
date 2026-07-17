@@ -1,0 +1,1 @@
+Remember this game is a simple visual puzzle. The solution path may become clear after a few exploratory moves. Look at the images, consider the most visually salient pattern or mechanic, and keep the world model simple enough to support planning.
