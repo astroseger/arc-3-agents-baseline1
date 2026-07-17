@@ -104,17 +104,6 @@ def steps_on_last(run: dict[str, Any]) -> int:
     return interrupted_level_steps(run)
 
 
-def run_status(scorecard: dict[str, Any]) -> str:
-    run = first_run_from_scorecard(scorecard)
-    if run.get("state") == "WIN":
-        return "normal termination"
-
-    steps = steps_on_last(run)
-    if steps >= 1500:
-        return "normal termination"
-    return "interrupted"
-
-
 def table_row(runs_dir: Path, game: str) -> list[str]:
     scorecard = read_json(scorecard_path(runs_dir, game))
     run = first_run_from_scorecard(scorecard)
@@ -129,7 +118,6 @@ def table_row(runs_dir: Path, game: str) -> list[str]:
         format_score(scorecard.get("score")),
         str(steps_on_solved(run)),
         "-" if levels_solved == total_levels else str(steps_on_last(run)),
-        run_status(scorecard),
     ]
 
 
@@ -212,12 +200,12 @@ def print_results_md(runs_dirs: list[Path]) -> None:
     print("# Results")
     print()
     if show_run_index:
-        print("| Game | Run index | Levels solved | Score | Steps on Solved | Steps on Unsolved | Run Status |")
-        print("|---|---:|---:|---:|---:|---:|---|")
+        print("| Game | Run index | Levels solved | Score | Steps on Solved | Steps on Unsolved |")
+        print("|---|---:|---:|---:|---:|---:|")
         sorted_rows = sorted(rows)
     else:
-        print("| Game | Levels solved | Score | Steps on Solved | Steps on Unsolved | Run Status |")
-        print("|---|---:|---:|---:|---:|---|")
+        print("| Game | Levels solved | Score | Steps on Solved | Steps on Unsolved |")
+        print("|---|---:|---:|---:|---:|")
         sorted_rows = [[row[0], *row[2:]] for row in sorted(rows)]
 
     for row in sorted_rows:

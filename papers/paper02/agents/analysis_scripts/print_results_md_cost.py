@@ -44,9 +44,25 @@ def format_score(value: Any) -> str:
     return f"{score:.2f}%"
 
 
-def format_cost(value: Any) -> str:
-    cost = float(value or 0.0)
-    return f"${cost:,.2f}"
+def format_cost_tokens(value: Any) -> str:
+    cost_tokens = float(value or 0.0)
+    return f"{cost_tokens / 1_000_000:,.2f}"
+
+
+def cost_tokens(usage: dict[str, Any], context: str) -> float:
+    required_fields = (
+        "cached_input_tokens",
+        "input_tokens",
+        "output_tokens",
+    )
+    for field in required_fields:
+        if field not in usage:
+            raise ValueError(f"Missing {context}.{field}")
+
+    cached_input = float(usage["cached_input_tokens"] or 0.0)
+    total_input = float(usage["input_tokens"] or 0.0)
+    output = float(usage["output_tokens"] or 0.0)
+    return cached_input / 60 + (total_input - cached_input) / 6 + output
 
 
 def game_name_from_scorecard(scorecard: dict[str, Any]) -> str:
@@ -109,32 +125,19 @@ def steps_on_last(run: dict[str, Any]) -> int:
     return interrupted_level_steps(run)
 
 
-def run_status(scorecard: dict[str, Any]) -> str:
-    run = first_run_from_scorecard(scorecard)
-    if run.get("state") == "WIN":
-        return "normal termination"
-
-    steps = steps_on_last(run)
-    if steps >= 1500:
-        return "normal termination"
-    return "interrupted"
-
-
-def estimated_cost_for_game(cost_payload: dict[str, Any], game: str) -> str:
+def cost_tokens_for_game(cost_payload: dict[str, Any], game: str) -> str:
     games = cost_payload.get("games")
     if not isinstance(games, dict):
         raise ValueError("Expected 'games' object in cost estimation payload")
 
-    game_cost = games.get(game)
-    if not isinstance(game_cost, dict):
-        raise ValueError(f"Expected cost object for game {game}")
-    if "estimated_cost_usd" not in game_cost:
-        raise ValueError(f"Missing estimated_cost_usd for game {game}")
+    game_usage = games.get(game)
+    if not isinstance(game_usage, dict):
+        raise ValueError(f"Expected usage object for game {game}")
 
-    return format_cost(game_cost["estimated_cost_usd"])
+    return format_cost_tokens(cost_tokens(game_usage, f"games.{game}"))
 
 
-def table_row(runs_dir: Path, game: str, estimated_cost: str) -> list[str]:
+def table_row(runs_dir: Path, game: str, game_cost_tokens: str) -> list[str]:
     scorecard = read_json(scorecard_path(runs_dir, game))
     run = first_run_from_scorecard(scorecard)
     levels_solved = int(scorecard.get("total_levels_completed", 0) or 0)
@@ -148,8 +151,7 @@ def table_row(runs_dir: Path, game: str, estimated_cost: str) -> list[str]:
         format_score(scorecard.get("score")),
         str(steps_on_solved(run)),
         "-" if levels_solved == total_levels else str(steps_on_last(run)),
-        estimated_cost,
-        run_status(scorecard),
+        game_cost_tokens,
     ]
 
 
@@ -174,12 +176,12 @@ def rows_for_runs_dir(runs_dir: Path) -> list[list[str]]:
         score_path = scorecard_path(runs_dir, game)
         if not score_path.is_file():
             raise FileNotFoundError(f"Scorecard file does not exist: {score_path}")
-        rows.append(table_row(runs_dir, game, estimated_cost_for_game(cost_payload, game)))
+        rows.append(table_row(runs_dir, game, cost_tokens_for_game(cost_payload, game)))
     return rows
 
 
-def total_cost_for_runs_dir(runs_dir: Path) -> float:
-    total_cost = 0.0
+def total_cost_tokens_for_runs_dir(runs_dir: Path) -> float:
+    total_cost_tokens = 0.0
     for game in cost_estimation_games(runs_dir):
         cost_path = cost_estimation_path(runs_dir, game)
         if not cost_path.is_file():
@@ -188,10 +190,8 @@ def total_cost_for_runs_dir(runs_dir: Path) -> float:
         totals = cost_payload.get("totals")
         if not isinstance(totals, dict):
             raise ValueError(f"Expected 'totals' object in {cost_path}")
-        if "estimated_cost_usd" not in totals:
-            raise ValueError(f"Missing totals.estimated_cost_usd in {cost_path}")
-        total_cost += float(totals["estimated_cost_usd"] or 0.0)
-    return total_cost
+        total_cost_tokens += cost_tokens(totals, "totals")
+    return total_cost_tokens
 
 
 def summary_entries_for_runs_dir(runs_dir: Path) -> list[tuple[str, bool, float]]:
@@ -207,7 +207,9 @@ def summary_entries_for_runs_dir(runs_dir: Path) -> list[tuple[str, bool, float]
     return entries
 
 
-def print_summary(entries: list[tuple[str, bool, float]], total_cost: float) -> None:
+def print_summary(
+    entries: list[tuple[str, bool, float]], total_cost_tokens: float
+) -> None:
     by_game: dict[str, list[tuple[bool, float]]] = {}
     for game_name, solved, score in entries:
         by_game.setdefault(game_name, []).append((solved, score))
@@ -230,7 +232,10 @@ def print_summary(entries: list[tuple[str, bool, float]], total_cost: float) -> 
     print()
     print(f"fully solved games: {fully_solved_games}/{len(by_game)}")
     print(f"mean per-game RHAE: {format_score(mean_per_game_score)}")
-    print(f"total cost: {format_cost(total_cost)}")
+    print(
+        "total cost tokens (millions): "
+        f"{format_cost_tokens(total_cost_tokens)}"
+    )
 
 
 def print_results_md(runs_dirs: list[Path]) -> None:
@@ -244,24 +249,26 @@ def print_results_md(runs_dirs: list[Path]) -> None:
         for runs_dir in runs_dirs
         for entry in summary_entries_for_runs_dir(runs_dir)
     ]
-    total_cost = sum(total_cost_for_runs_dir(runs_dir) for runs_dir in runs_dirs)
+    total_cost_tokens = sum(
+        total_cost_tokens_for_runs_dir(runs_dir) for runs_dir in runs_dirs
+    )
 
     show_run_index = len({row[0] for row in rows}) != len(rows)
 
     print("# Results")
     print()
     if show_run_index:
-        print("| Game | Run index | Levels solved | Score | Steps on Solved | Steps on Unsolved | Estimated cost | Run Status |")
-        print("|---|---:|---:|---:|---:|---:|---:|---|")
+        print("| Game | Run index | Levels solved | Score | Steps on Solved | Steps on Unsolved | Cost Tokens (Millions) |")
+        print("|---|---:|---:|---:|---:|---:|---:|")
         sorted_rows = sorted(rows)
     else:
-        print("| Game | Levels solved | Score | Steps on Solved | Steps on Unsolved | Estimated cost | Run Status |")
-        print("|---|---:|---:|---:|---:|---:|---|")
+        print("| Game | Levels solved | Score | Steps on Solved | Steps on Unsolved | Cost Tokens (Millions) |")
+        print("|---|---:|---:|---:|---:|---:|")
         sorted_rows = [[row[0], *row[2:]] for row in sorted(rows)]
 
     for row in sorted_rows:
         print("| " + " | ".join(row) + " |")
-    print_summary(summary_entries, total_cost)
+    print_summary(summary_entries, total_cost_tokens)
 
 
 def main() -> int:
