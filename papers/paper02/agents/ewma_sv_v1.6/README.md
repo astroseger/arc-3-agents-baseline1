@@ -46,6 +46,8 @@ cd codex_accounts
 
 Follow the device-auth instructions for each command. You can verify an account with `./check_account.sh codex01` and the analogous command for the others. Return to the package root with `cd ..` before continuing.
 
+> **Capacity note:** A full 25-game run of this variant may require roughly 4–5 ChatGPT Pro subscriptions to remain within weekly usage limits. Multiple Codex account folders may use the same subscription, but they share its limits, and each concurrent game must use a different folder. Check current weekly and rolling limits before launching.
+
 ### Run experiments
 
 1. Edit `run_config.yaml`.
