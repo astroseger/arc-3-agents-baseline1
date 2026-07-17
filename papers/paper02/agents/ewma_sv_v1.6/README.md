@@ -1,70 +1,50 @@
-# BASELINE1 Agent Source with Docker Automation
+# `ewma_sv_v1.6`
 
-## Introduction
+This directory contains the v1.6 fixed-interface verification follow-up agent and the Docker automation used to run it. See [AGENT.md](AGENT.md) for its implementation and [the parent README](../README.md) for the complete agent family and analysis utilities.
 
-This repository contains the source code for the BASELINE1 agent and the Docker-based automation used to run it.
+## Variant
 
-If you want to check that the agent does not have access to game-specific hidden information and is intended to be general within the ARC-AGI-3 universe, read [AGENT.md](AGENT.md).
+- It retains fixed model interfaces, scheduled simplification, and exact replay/planner verification.
+- It includes the trouble intervention, accelerated client, and RESET-only rule after `GAME_OVER`.
+- The Docker image installs Codex CLI `0.144.1`.
 
-To run the system you need:
+## Default run
 
-- a Linux machine with Docker installed;
-- an ARC API key available in the environment as `ARC_API_KEY`;
-- a ChatGPT Pro subscription.
+`run_config.yaml` selects all 25 public games, four Codex account directories (`codex01` through `codex04`), and `gpt-5.6-sol` with `max` reasoning effort. Edit it before launching if you want another model, effort, game subset, or account layout.
 
-With the default GPT-5.5/high configuration, one ChatGPT Pro subscription (200 USD) is enough to run a full experiment for roughly 2-8 games within the Codex weekly limit for that account.
+## Requirements
+
+- Linux with Docker;
+- an ARC API key in `ARC_API_KEY`;
+- authenticated Codex account directories, or `OPENAI_API_KEY` for the API-key controller.
 
 ## System Requirements
 
 For one game, expect to need about 1-2 moderately fast CPU cores and about 3 GB of memory.
 
-For 25 games in parallel, a reasonable target is about 48 CPU cores and 64 GB RAM. For two games in parallel, almost any modern machine should be enough.
+For 25 games in parallel, a reasonable target is about 48 CPU cores and 64 GB RAM. For four games in parallel, a modern workstation is generally sufficient.
 
 ## How to Run the System
 
 ### Set up Codex accounts
 
-As mentioned above, you can run two games in parallel with a single ChatGPT Pro subscription (200 USD) without hitting the 5-hour usage limit. To do this, set up two Codex account folders authenticated with the same ChatGPT subscription.
-
-To create and authenticate those accounts:
-
-1. Build the Docker images:
+Build the Docker images:
 
 ```bash
 ./src/build_dockers.sh
 ```
 
-2. Set up the first Codex account:
+The default configuration uses four account folders. Create and authenticate each one:
 
 ```bash
 cd codex_accounts
 ./prepare_account.sh codex01
-```
-
-Follow the device-auth instructions and authenticate with your ChatGPT Pro subscription.
-
-3. Optionally check the first account:
-
-```bash
-cd codex_accounts
-./check_account.sh codex01
-```
-
-4. Optionally set up a second account for parallel runs:
-
-```bash
-cd codex_accounts
 ./prepare_account.sh codex02
+./prepare_account.sh codex03
+./prepare_account.sh codex04
 ```
 
-5. Optionally check the second account:
-
-```bash
-cd codex_accounts
-./check_account.sh codex02
-```
-
-After this, the system is ready to run experiments.
+Follow the device-auth instructions for each command. You can verify an account with `./check_account.sh codex01` and the analogous command for the others. Return to the package root with `cd ..` before continuing.
 
 ### Run experiments
 
@@ -86,37 +66,7 @@ python3 run_controller.py
 
 By default, `run_controller.py` uses the local server mode, not competition mode. Results are written under `run/`. The controller expects `run/` not to exist before it starts.
 
-After the run finishes, generate score summaries with the analysis scripts.
-
-## Analysis Scripts
-
-The `analysis_scripts/` directory contains helper scripts for inspecting runs.
-
-- `count_level_attempts_dirs.py` tracks progress from attempt directories:
-
-```bash
-python3 analysis_scripts/count_level_attempts_dirs.py run
-```
-
-- `analyse_runs.py` calculates scores:
-
-```bash
-python3 analysis_scripts/analyse_runs.py run
-```
-
-- `print_results_md.py` prints scores as a Markdown table. Run it after `analyse_runs.py`:
-
-```bash
-python3 analysis_scripts/print_results_md.py run
-```
-
-- `summarize_agent_logs_in_dir.py` summarizes agent logs:
-
-```bash
-python3 analysis_scripts/summarize_agent_logs_in_dir.py run
-```
-
-- `get_comptetiotion_scorecard_from_id.sh` downloads a competition scorecard by ID when you run in competition mode.
+Analysis utilities now live in [`../analysis_scripts`](../analysis_scripts) and are documented in [`../README.md`](../README.md).
 
 ## Running in Competition Mode
 
@@ -128,7 +78,7 @@ python3 run_controller.py --competition
 
 There are two important caveats:
 
-1. A competition scorecard can be closed after about 15 minutes of inactivity. In practice the limit may be somewhat longer, but the agent can spend more than 15 minutes in simplification or refactoring prompts, especially when Codex is slow. This makes competition mode better suited to large parallel runs.
+1. A competition scorecard can be closed after a period of inactivity, while an agent may spend substantial time reasoning between environment actions. Competition mode is therefore better suited to sufficiently parallel runs.
 
 2. A competition scorecard closes after 24 hours. Some individual games can take more than 24 hours, and you may not have enough ChatGPT Pro subscriptions to run all games in parallel.
 
@@ -136,4 +86,4 @@ There are two important caveats:
 
 There is also `run_controller_with_api_key.py`, which runs Codex with `OPENAI_API_KEY` instead of authenticated Codex account folders.
 
-This mode is expected to be much more expensive. In earlier testing, prompt-cache hit rates were much lower with API-key runs than with ChatGPT Pro-backed Codex accounts. Because of this, runs that fit within the weekly limit of a single ChatGPT Pro account may cost around 5000 USD if run through the API. The script prints a warning and requires explicit confirmation before it starts.
+API-key runs may be substantially more expensive than runs backed by authenticated Codex accounts. The script prints a warning and requires explicit confirmation before it starts.

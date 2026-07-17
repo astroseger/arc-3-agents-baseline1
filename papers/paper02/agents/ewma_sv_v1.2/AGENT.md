@@ -1,49 +1,26 @@
-# Agent
+# `ewma_sv_v1.2` architecture
 
-Our agent is based on unsandboxed Codex. In principle, this means the Codex process can read any file that exists inside its runtime environment. Because of that, we treat the filesystem visible to the agent as part of the task definition: it must not contain hidden game implementation, previous run state, or any information that would let the agent cheat instead of learning from client observations.
+This is the v1.2 fixed-interface executable-world-model treatment with scheduled simplification and verification.
 
-- We run the agent in an isolated Docker container.
-- We isolate it from the `arc_agi` library through a client/server boundary. The server that uses `arc_agi` runs in a separate Docker container.
-- Before each new agent run, we remove previous Codex account state except for required authentication data such as `auth.json`.
-- The [`src/agent`](src/agent) folder contains all information available to the agent.
+## Isolation and controller
 
-## Contents of [`src/agent`](src/agent)
+Codex runs unsandboxed inside an isolated Docker container. The game implementation and `arc_agi` library remain in a separate server container, and each new playthrough starts with a clean run workspace and cleaned Codex state except for required authentication data.
 
-[`agent.py`](src/agent/agent.py) is the external controller. It prepares the run directory, starts Codex, sends prompts to Codex, runs the client, inspects progress, and decides which prompt to send next.
+[`agent.py`](src/agent/agent.py) is a thin external controller. It starts the client, sends prompts, inspects session progress, and selects the normal, reset, or stuck protocol; game-solving logic remains with Codex. [`agent_runner.py`](src/agent/agent_runner.py) supervises recovery after an unexpected exit or 30 minutes without log activity, with at most ten recovery attempts. The Docker image installs Codex CLI `0.128.0`.
 
-The other top-level Python files are helper libraries and debugging tools used by [`agent.py`](src/agent/agent.py): running Codex, reading session status, logging prompts, taking git snapshots, etc.
+## Treatment
 
-[`prompts/`](src/agent/prompts) contains the prompts that [`agent.py`](src/agent/agent.py) sends to Codex during the run.
+- The [main prompt](src/agent/prompts/main_prompt.md) fixes interfaces for the transition engine, initial-state reconstruction, observation renderer, and main planner.
+- The same light/four-stage simplification schedule as `ewma_s_v1.2` runs in normal, reset, stuck, and recovery paths.
+- Codex is instructed to run the world-model and planner verifiers after changes; the external controller does not silently enforce them.
+- Online plan gating is not required. `plan_executor.py` is available for Codex to discover but is not named in the prompts.
 
-[`workspace_init/`](src/agent/workspace_init) is the initial workspace for the agent. We copy it into `agent_run/` before starting Codex.
+## Initial agent workspace
 
-For a more agent-facing explanation of these files, read [`prompts/main_prompt.md`](src/agent/prompts/main_prompt.md). It describes the provided tools and expected deliverables in the same terms Codex sees during a run.
+The workspace supplies empty model stubs:
 
-## World model stubs provided to the agent
+- [`world_model_engine.py`](src/agent/workspace_init/world_model_engine.py)
+- [`world_model_state_io.py`](src/agent/workspace_init/world_model_state_io.py)
+- [`world_model_main_planner.py`](src/agent/workspace_init/world_model_main_planner.py)
 
-- [`world_model_engine.py`](src/agent/workspace_init/world_model_engine.py) - world dynamics model stub.
-- [`world_model_state_io.py`](src/agent/workspace_init/world_model_state_io.py) - reconstruction/rendering stub.
-- [`world_model_main_planner.py`](src/agent/workspace_init/world_model_main_planner.py) - planner stub.
-
-## Helper programs provided to the agent
-
-- [`client/client.py`](src/agent/workspace_init/client/client.py) - live game CLI: start, move, status, stop.
-- [`client/ascii_to_png.py`](src/agent/workspace_init/client/ascii_to_png.py) - ASCII frame to PNG converter.
-- [`verify_world_model.py`](src/agent/workspace_init/verify_world_model.py) - checks world-model predictions against recorded attempts.
-- [`verify_main_planner.py`](src/agent/workspace_init/verify_main_planner.py) - checks planner success on completed levels.
-- [`run_main_planner.py`](src/agent/workspace_init/run_main_planner.py) - runs the main planner.
-- [`run_aux_planner.py`](src/agent/workspace_init/run_aux_planner.py) - runs auxiliary planners.
-- [`plan_executor.py`](src/agent/workspace_init/plan_executor.py) - executes planned actions in both game and model.
-- [`plot_initial_full_frames.py`](src/agent/workspace_init/plot_initial_full_frames.py) - renders reconstructed full-frame maps.
-- [`generate_animation_analysis_prompt.py`](src/agent/workspace_init/generate_animation_analysis_prompt.py) - creates animation-analysis prompts.
-
-## Helper libraries provided to the agent
-
-- [`session_tools.py`](src/agent/workspace_init/session_tools.py) - reads sessions, attempts, frames, and metadata.
-- [`state_reconstruction_tools.py`](src/agent/workspace_init/state_reconstruction_tools.py) - reconstructs and simulates world-model states.
-- [`frame_plot_lib.py`](src/agent/workspace_init/frame_plot_lib.py) - renders frames and mismatch visualizations.
-- [`mismatch_artifacts.py`](src/agent/workspace_init/mismatch_artifacts.py) - saves mismatch/debug artifacts.
-- [`load_initial_full_frame.py`](src/agent/workspace_init/load_initial_full_frame.py) - loads reconstructed full-frame maps.
-- [`script_tools.py`](src/agent/workspace_init/script_tools.py) - shared CLI/planner helper functions.
-- [`timeout_tools.py`](src/agent/workspace_init/timeout_tools.py) - timeout context manager.
-- [`game_status.py`](src/agent/workspace_init/game_status.py) - shared status constants.
+It also supplies the live client, [world-model replay verification](src/agent/workspace_init/verify_world_model.py), [planner verification](src/agent/workspace_init/verify_main_planner.py), planner runners, session/state-reconstruction helpers, mismatch visualization, and [`plan_executor.py`](src/agent/workspace_init/plan_executor.py). These files contain no game-specific rules, layouts, or solutions.
