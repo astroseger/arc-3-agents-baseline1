@@ -1,0 +1,1 @@
+You have been interrupted. Please review your world model, reasoning logs, and the current game state. Think about possible future actions and report your assessment of the current situation.

@@ -1,0 +1,13 @@
+You are having trouble with this level. This is a strong signal that you are probably missing something important, because every level should be solvable in a single attempt.
+
+Remember that the general goal is the same across all levels. The solution is likely simple. You may be overlooking key visual cues, overthinking the problem, or getting stuck in tunnel vision.
+
+Try to reason in terms of your world model. Analyze what might be missing from the model that prevents you from solving this level.
+
+You will get another attempt, but before trying again, do the following:
+
+1. Analyze what you have already tried. Remember that every attempt at the same level starts from the same initial state, and the game is deterministic. Therefore, your previous attempts provide reliable evidence about what does and does not work.
+2. Identify what you may have missed.
+3. Formulate a new hypothesis about how to solve the level.
+4. Explain what you are going to try in the next attempt and why.
+

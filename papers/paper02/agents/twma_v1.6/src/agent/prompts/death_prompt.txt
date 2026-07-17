@@ -1,0 +1,2 @@
+You have reached the `GAME_OVER` state in the current attempt.
+Use this outcome to improve your world model. Look at the last step and any available visual clues, including animations when they are useful. Consider whether the failure has a simple explanation that can generalize across levels.
