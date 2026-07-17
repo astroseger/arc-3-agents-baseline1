@@ -1,0 +1,5 @@
+codex_accounts: [codex01, codex02]
+games: [sb26, ar25, tr87, tu93, cd82, ft09, lp85]
+tag: api-test
+reasoning_effort: high
+model: gpt-5.5
