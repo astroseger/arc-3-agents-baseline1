@@ -1,0 +1,3 @@
+# When to stop
+
+Continue working until you either complete the current level or the game reaches the GAME_OVER state. When either condition occurs, stop taking actions in the real game, prepare the required deliverables, and report back to me.
