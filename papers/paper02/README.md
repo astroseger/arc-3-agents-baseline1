@@ -2,7 +2,7 @@
 
 This directory contains the supporting materials for the article.
 
-**Paper:** arXiv link to be added. <!-- TODO: add the arXiv URL. -->
+**Paper:** [Do Coding Agents Need Executable World Models, Simplification, and Verification to Solve ARC-AGI-3?](http://arxiv.org/abs/2607.15439)
 
 ## Contents
 

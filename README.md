@@ -24,7 +24,7 @@ For new experiments, consider:
 ## Papers and supporting materials
 
 - [Executable World Models for ARC-AGI-3 in the Era of Coding Agents](https://arxiv.org/abs/2605.05138) — [supporting materials](papers/paper01/)
-- *Do Coding Agents Need Executable World Models, Simplification, and Verification to Solve ARC-AGI-3?* — arXiv link to be added; [supporting materials](papers/paper02/)
+- [Do Coding Agents Need Executable World Models, Simplification, and Verification to Solve ARC-AGI-3?](http://arxiv.org/abs/2607.15439) — [supporting materials](papers/paper02/)
 
 ## Citation
 
