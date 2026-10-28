@@ -1,9 +1,9 @@
-# ARC-AGI-3 General Agents
-
 > [!NOTE]
 > **New project: [EnvTraverse](https://github.com/astroseger/envtraverse).**
 > See our latest work on environment-agnostic agents and the accompanying papers,
 > code, and experiment results.
+
+# ARC-AGI-3 General Agents
 
 This repository is the project page for our experiments with coding agents designed to be game-general within ARC-AGI-3. We develop and evaluate agent architectures, reasoning strategies, and tools for solving unfamiliar interactive games.
 
